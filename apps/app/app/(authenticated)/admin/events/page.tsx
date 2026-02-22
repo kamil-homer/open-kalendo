@@ -20,36 +20,53 @@ const AdminEventsPage = async () => {
     <>
       <Header page="Events Management" pages={["Admin", "Events"]} />
       <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-        <div className="flex justify-between items-center">
-          <h1 className="text-2xl font-bold">Manage Events</h1>
-          <button className="bg-primary text-primary-foreground px-4 py-2 rounded-md">
+        <div className="flex items-center justify-between">
+          <h1 className="font-bold text-2xl">Manage Events</h1>
+          <button className="rounded-md bg-primary px-4 py-2 text-primary-foreground">
             Create New Event
           </button>
         </div>
-        
-        <div className="border rounded-md overflow-hidden">
+
+        <div className="overflow-hidden rounded-md border">
           <table className="min-w-full divide-y divide-border">
             <thead className="bg-muted">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">ID</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">Title</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">Actions</th>
+                <th className="px-6 py-3 text-left font-medium text-muted-foreground text-xs uppercase tracking-wider">
+                  ID
+                </th>
+                <th className="px-6 py-3 text-left font-medium text-muted-foreground text-xs uppercase tracking-wider">
+                  Title
+                </th>
+                <th className="px-6 py-3 text-left font-medium text-muted-foreground text-xs uppercase tracking-wider">
+                  Actions
+                </th>
               </tr>
             </thead>
-            <tbody className="bg-background divide-y divide-border">
+            <tbody className="divide-y divide-border bg-background">
               {events.map((event) => (
                 <tr key={event.id}>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm">{event.id}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">{event.title}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-muted-foreground">
-                    <button className="text-primary hover:underline mr-4">Edit</button>
-                    <button className="text-destructive hover:underline">Delete</button>
+                  <td className="whitespace-nowrap px-6 py-4 text-sm">
+                    {event.id}
+                  </td>
+                  <td className="whitespace-nowrap px-6 py-4 font-medium text-sm">
+                    {event.title}
+                  </td>
+                  <td className="whitespace-nowrap px-6 py-4 text-muted-foreground text-sm">
+                    <button className="mr-4 text-primary hover:underline">
+                      Edit
+                    </button>
+                    <button className="text-destructive hover:underline">
+                      Delete
+                    </button>
                   </td>
                 </tr>
               ))}
               {events.length === 0 && (
                 <tr>
-                  <td colSpan={3} className="px-6 py-10 text-center text-muted-foreground">
+                  <td
+                    className="px-6 py-10 text-center text-muted-foreground"
+                    colSpan={3}
+                  >
                     No events managed yet.
                   </td>
                 </tr>

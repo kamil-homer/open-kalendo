@@ -22,24 +22,29 @@ const App = async () => {
   return (
     <div className="container mx-auto p-8">
       <header className="mb-8">
-        <h1 className="text-4xl font-bold">{title}</h1>
+        <h1 className="font-bold text-4xl">{title}</h1>
         <p className="text-muted-foreground">{description}</p>
       </header>
-      
+
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {events.map((event) => (
-          <div key={event.id} className="border rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow">
-            <h2 className="text-xl font-semibold mb-2">{event.title}</h2>
-            <div className="aspect-video bg-muted rounded-md mb-4 flex items-center justify-center">
+          <div
+            className="rounded-lg border p-6 shadow-sm transition-shadow hover:shadow-md"
+            key={event.id}
+          >
+            <h2 className="mb-2 font-semibold text-xl">{event.title}</h2>
+            <div className="mb-4 flex aspect-video items-center justify-center rounded-md bg-muted">
               <span className="text-muted-foreground">Event Preview</span>
             </div>
-            <button className="w-full bg-primary text-primary-foreground py-2 rounded-md font-medium">
+            <button className="w-full rounded-md bg-primary py-2 font-medium text-primary-foreground">
               View Details
             </button>
           </div>
         ))}
         {events.length === 0 && (
-          <p className="col-span-full text-center text-muted-foreground">No events found.</p>
+          <p className="col-span-full text-center text-muted-foreground">
+            No events found.
+          </p>
         )}
       </div>
     </div>

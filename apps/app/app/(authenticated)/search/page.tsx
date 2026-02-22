@@ -46,13 +46,18 @@ const SearchPage = async ({ searchParams }: SearchPageProperties) => {
       <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
         <div className="grid auto-rows-min gap-4 md:grid-cols-3">
           {articles.map((article) => (
-            <div className="aspect-video rounded-xl bg-muted/50 p-4 border" key={article.id}>
+            <div
+              className="aspect-video rounded-xl border bg-muted/50 p-4"
+              key={article.id}
+            >
               <h3 className="font-semibold">{article.title}</h3>
-              <p className="text-sm text-muted-foreground line-clamp-2">Click to read more...</p>
+              <p className="line-clamp-2 text-muted-foreground text-sm">
+                Click to read more...
+              </p>
             </div>
           ))}
           {articles.length === 0 && (
-            <div className="col-span-full text-center py-10 text-muted-foreground">
+            <div className="col-span-full py-10 text-center text-muted-foreground">
               No results found for "{q}"
             </div>
           )}
