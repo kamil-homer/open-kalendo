@@ -3,6 +3,7 @@ import { ModeToggle } from "@repo/design-system/components/mode-toggle";
 import { CommandIcon } from "lucide-react";
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { LanguageSwitcher } from "./components/language-switcher";
 
 type PublicLayoutProps = {
   readonly children: ReactNode;
@@ -30,6 +31,7 @@ const PublicLayout = async ({ children }: PublicLayoutProps) => {
             </nav>
           </div>
           <div className="flex items-center space-x-4">
+            <LanguageSwitcher />
             <ModeToggle />
             {userId ? (
               <Link

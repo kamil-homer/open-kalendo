@@ -15,7 +15,7 @@ import { Loader2, Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
-import { deleteEvent } from "../../../../actions/events/delete";
+import { deleteEvent } from "../../../../../actions/events/delete";
 
 interface DeleteEventDialogProps {
   eventId: string;

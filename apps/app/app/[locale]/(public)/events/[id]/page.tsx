@@ -3,7 +3,7 @@ import { pl } from "date-fns/locale";
 import { ArrowLeft, Calendar, Clock, ExternalLink, MapPin } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getEventById } from "../../../actions/events/get";
+import { getEventById } from "../../../../actions/events/get";
 
 type EventPageProps = {
   params: Promise<{

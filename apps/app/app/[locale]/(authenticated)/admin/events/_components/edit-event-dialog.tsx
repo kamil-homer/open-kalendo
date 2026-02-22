@@ -31,14 +31,14 @@ import { Switch } from "@repo/design-system/components/ui/switch";
 import { Textarea } from "@repo/design-system/components/ui/textarea";
 import { cn } from "@repo/design-system/lib/utils";
 import { format } from "date-fns";
-import { CalendarIcon, Loader2, Plus } from "lucide-react";
+import { CalendarIcon, Loader2, Pencil } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import * as z from "zod";
 
-import { createEvent } from "../../../../actions/events/create";
+import { updateEvent } from "../../../../../actions/events/update";
 
 const formSchema = z.object({
   title: z.string().min(2, {
@@ -59,7 +59,19 @@ const formSchema = z.object({
   published: z.boolean().default(false),
 });
 
-export function CreateEventDialog() {
+interface EditEventDialogProps {
+  event: {
+    id: string;
+    title: string;
+    description: string | null;
+    date: Date;
+    location: string | null;
+    link: string | null;
+    published: boolean;
+  };
+}
+
+export function EditEventDialog({ event }: EditEventDialogProps) {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -67,12 +79,13 @@ export function CreateEventDialog() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      title: "",
-      description: "",
-      time: "12:00",
-      location: "",
-      link: "",
-      published: false,
+      title: event.title,
+      description: event.description || "",
+      date: new Date(event.date),
+      time: format(new Date(event.date), "HH:mm"),
+      location: event.location || "",
+      link: event.link || "",
+      published: event.published,
     },
   });
 
@@ -85,7 +98,7 @@ export function CreateEventDialog() {
       combinedDate.setMinutes(minutes);
 
       const { time, ...rest } = values;
-      const result = await createEvent({
+      const result = await updateEvent(event.id, {
         ...rest,
         date: combinedDate,
         link: values.link || undefined,
@@ -96,9 +109,8 @@ export function CreateEventDialog() {
       if (result.error) {
         toast.error(result.error);
       } else {
-        toast.success("Event created successfully");
+        toast.success("Event updated successfully");
         setOpen(false);
-        form.reset();
         router.refresh();
       }
     } catch (error) {
@@ -111,16 +123,16 @@ export function CreateEventDialog() {
   return (
     <Dialog onOpenChange={setOpen} open={open}>
       <DialogTrigger asChild>
-        <Button>
-          <Plus className="mr-2 h-4 w-4" />
-          Create New Event
-        </Button>
+        <button className="inline-flex items-center gap-1 text-primary hover:underline">
+          <Pencil className="h-4 w-4" />
+          Edit
+        </button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[525px]">
         <DialogHeader>
-          <DialogTitle>Create Event</DialogTitle>
+          <DialogTitle>Edit Event</DialogTitle>
           <DialogDescription>
-            Fill in the details below to create a new event.
+            Update the details of your event below.
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
@@ -258,7 +270,7 @@ export function CreateEventDialog() {
             <DialogFooter>
               <Button disabled={loading} type="submit">
                 {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                Create Event
+                Save Changes
               </Button>
             </DialogFooter>
           </form>

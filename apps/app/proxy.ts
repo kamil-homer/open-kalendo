@@ -1,10 +1,12 @@
 import { authMiddleware, createRouteMatcher } from "@repo/auth/proxy";
+import { internationalizationMiddleware } from "@repo/internationalization/proxy";
 import {
   noseconeOptions,
   noseconeOptionsWithToolbar,
   securityMiddleware,
 } from "@repo/security/proxy";
-import type { NextProxy } from "next/server";
+import { createNEMO } from "@rescale/nemo";
+import { type NextProxy, type NextRequest } from "next/server";
 import { env } from "./env";
 
 const securityHeaders = env.FLAGS_SECRET
@@ -16,17 +18,33 @@ const isPublicRoute = createRouteMatcher([
   "/docs(.*)",
   "/sign-in(.*)",
   "/sign-up(.*)",
+  "/:locale",
+  "/:locale/docs(.*)",
+  "/:locale/sign-in(.*)",
+  "/:locale/sign-up(.*)",
 ]);
+
+const composedMiddleware = createNEMO(
+  {},
+  {
+    before: [internationalizationMiddleware],
+  }
+);
 
 // Clerk middleware wraps other middleware in its callback
 // For apps using Clerk, compose middleware inside authMiddleware callback
-// For apps without Clerk, use createNEMO for composition (see apps/web)
-export default authMiddleware(async (auth, request) => {
+export default authMiddleware(async (auth, request, event) => {
   if (!isPublicRoute(request)) {
     await auth.protect();
   }
 
-  return securityHeaders();
+  const headersResponse = securityHeaders();
+  const middlewareResponse = await composedMiddleware(
+    request as unknown as NextRequest,
+    event
+  );
+
+  return middlewareResponse || headersResponse;
 }) as unknown as NextProxy;
 
 export const config = {
