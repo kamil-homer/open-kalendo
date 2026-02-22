@@ -1,6 +1,5 @@
 import { database } from "@repo/database";
 import { Header } from "../../components/header";
-import Link from "next/link";
 
 const AdminDocsPage = async () => {
   const docs = await database.doc.findMany({
@@ -49,11 +48,11 @@ const AdminDocsPage = async () => {
                   </td>
                   <td className="whitespace-nowrap px-6 py-4 text-sm">
                     {doc.published ? (
-                      <span className="inline-flex rounded-full bg-green-100 px-2 text-green-800 text-xs font-semibold leading-5 dark:bg-green-900/30 dark:text-green-400">
+                      <span className="inline-flex rounded-full bg-green-100 px-2 font-semibold text-green-800 text-xs leading-5 dark:bg-green-900/30 dark:text-green-400">
                         Published
                       </span>
                     ) : (
-                      <span className="inline-flex rounded-full bg-yellow-100 px-2 text-yellow-800 text-xs font-semibold leading-5 dark:bg-yellow-900/30 dark:text-yellow-400">
+                      <span className="inline-flex rounded-full bg-yellow-100 px-2 font-semibold text-xs text-yellow-800 leading-5 dark:bg-yellow-900/30 dark:text-yellow-400">
                         Draft
                       </span>
                     )}

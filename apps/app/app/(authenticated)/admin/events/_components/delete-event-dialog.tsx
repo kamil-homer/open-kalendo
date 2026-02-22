@@ -1,9 +1,5 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { toast } from "sonner";
-import { Loader2, Trash2 } from "lucide-react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -15,7 +11,10 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@repo/design-system/components/ui/alert-dialog";
-import { Button } from "@repo/design-system/components/ui/button";
+import { Loader2, Trash2 } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { toast } from "sonner";
 import { deleteEvent } from "../../../../actions/events/delete";
 
 interface DeleteEventDialogProps {
@@ -23,7 +22,10 @@ interface DeleteEventDialogProps {
   eventTitle: string;
 }
 
-export function DeleteEventDialog({ eventId, eventTitle }: DeleteEventDialogProps) {
+export function DeleteEventDialog({
+  eventId,
+  eventTitle,
+}: DeleteEventDialogProps) {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
@@ -47,7 +49,7 @@ export function DeleteEventDialog({ eventId, eventTitle }: DeleteEventDialogProp
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <button className="text-destructive hover:underline inline-flex items-center gap-1">
+        <button className="inline-flex items-center gap-1 text-destructive hover:underline">
           <Trash2 className="h-4 w-4" />
           Delete
         </button>
@@ -57,18 +59,22 @@ export function DeleteEventDialog({ eventId, eventTitle }: DeleteEventDialogProp
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
           <AlertDialogDescription>
             This action cannot be undone. This will permanently delete the event
-            <span className="font-semibold text-foreground"> "{eventTitle}"</span>.
+            <span className="font-semibold text-foreground">
+              {" "}
+              "{eventTitle}"
+            </span>
+            .
           </AlertDialogDescription>
         </AlertDialogHeader>
-          <AlertDialogFooter>
+        <AlertDialogFooter>
           <AlertDialogCancel disabled={loading}>Cancel</AlertDialogCancel>
           <AlertDialogAction
+            className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+            disabled={loading}
             onClick={(e) => {
               e.preventDefault();
               onDelete();
             }}
-            className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
-            disabled={loading}
           >
             {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
             Delete

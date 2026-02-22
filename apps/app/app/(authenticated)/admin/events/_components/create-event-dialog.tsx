@@ -1,15 +1,8 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
-import { format } from "date-fns";
-import { CalendarIcon, Loader2, Plus } from "lucide-react";
-import { toast } from "sonner";
-
 import { Button } from "@repo/design-system/components/ui/button";
+import { Calendar } from "@repo/design-system/components/ui/calendar";
 import {
   Dialog,
   DialogContent,
@@ -29,15 +22,21 @@ import {
   FormMessage,
 } from "@repo/design-system/components/ui/form";
 import { Input } from "@repo/design-system/components/ui/input";
-import { Textarea } from "@repo/design-system/components/ui/textarea";
-import { Calendar } from "@repo/design-system/components/ui/calendar";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@repo/design-system/components/ui/popover";
 import { Switch } from "@repo/design-system/components/ui/switch";
+import { Textarea } from "@repo/design-system/components/ui/textarea";
 import { cn } from "@repo/design-system/lib/utils";
+import { format } from "date-fns";
+import { CalendarIcon, Loader2, Plus } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import * as z from "zod";
 
 import { createEvent } from "../../../../actions/events/create";
 
@@ -53,7 +52,10 @@ const formSchema = z.object({
     message: "A time is required.",
   }),
   location: z.string().optional(),
-  link: z.url({ message: "Please enter a valid URL." }).optional().or(z.literal("")),
+  link: z
+    .url({ message: "Please enter a valid URL." })
+    .optional()
+    .or(z.literal("")),
   published: z.boolean().default(false),
 });
 
@@ -107,7 +109,7 @@ export function CreateEventDialog() {
   }
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog onOpenChange={setOpen} open={open}>
       <DialogTrigger asChild>
         <Button>
           <Plus className="mr-2 h-4 w-4" />
@@ -122,7 +124,7 @@ export function CreateEventDialog() {
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+          <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
             <FormField
               control={form.control}
               name="title"
@@ -144,8 +146,8 @@ export function CreateEventDialog() {
                   <FormLabel>Description</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Event description"
                       className="resize-none"
+                      placeholder="Event description"
                       {...field}
                     />
                   </FormControl>
@@ -164,11 +166,11 @@ export function CreateEventDialog() {
                       <PopoverTrigger asChild>
                         <FormControl>
                           <Button
-                            variant={"outline"}
                             className={cn(
                               "w-full pl-3 text-left font-normal",
                               !field.value && "text-muted-foreground"
                             )}
+                            variant={"outline"}
                           >
                             {field.value ? (
                               format(field.value, "PPP")
@@ -179,15 +181,13 @@ export function CreateEventDialog() {
                           </Button>
                         </FormControl>
                       </PopoverTrigger>
-                      <PopoverContent className="w-auto p-0" align="start">
+                      <PopoverContent align="start" className="w-auto p-0">
                         <Calendar
-                          mode="single"
-                          selected={field.value}
-                          onSelect={field.onChange}
-                          disabled={(date) =>
-                            date < new Date("1900-01-01")
-                          }
+                          disabled={(date) => date < new Date("1900-01-01")}
                           initialFocus
+                          mode="single"
+                          onSelect={field.onChange}
+                          selected={field.value}
                         />
                       </PopoverContent>
                     </Popover>
@@ -256,7 +256,7 @@ export function CreateEventDialog() {
               )}
             />
             <DialogFooter>
-              <Button type="submit" disabled={loading}>
+              <Button disabled={loading} type="submit">
                 {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                 Create Event
               </Button>

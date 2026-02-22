@@ -19,7 +19,9 @@ const AdminPage = async () => {
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="font-medium text-sm">Total Events</CardTitle>
+              <CardTitle className="font-medium text-sm">
+                Total Events
+              </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="font-bold text-2xl">{eventsCount}</div>
@@ -50,14 +52,14 @@ const AdminPage = async () => {
               </p>
               <div className="mt-4 flex gap-2">
                 <Link
-                  href="/admin/events"
                   className="inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 py-2 font-medium text-primary-foreground text-sm shadow transition-colors hover:bg-primary/90"
+                  href="/admin/events"
                 >
                   Manage Events
                 </Link>
                 <Link
-                  href="/admin/docs"
                   className="inline-flex h-9 items-center justify-center rounded-md border border-input bg-background px-4 py-2 font-medium text-sm shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground"
+                  href="/admin/docs"
                 >
                   Manage Docs
                 </Link>

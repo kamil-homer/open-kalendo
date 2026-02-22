@@ -3,59 +3,22 @@
 import { UserButton } from "@repo/auth/client";
 import { ModeToggle } from "@repo/design-system/components/mode-toggle";
 import { Button } from "@repo/design-system/components/ui/button";
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@repo/design-system/components/ui/collapsible";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@repo/design-system/components/ui/dropdown-menu";
+import { Collapsible } from "@repo/design-system/components/ui/collapsible";
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
   SidebarGroup,
-  SidebarGroupContent,
-  SidebarGroupLabel,
-  SidebarHeader,
   SidebarInset,
   SidebarMenu,
-  SidebarMenuAction,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarMenuSub,
-  SidebarMenuSubButton,
-  SidebarMenuSubItem,
   useSidebar,
 } from "@repo/design-system/components/ui/sidebar";
-import { cn } from "@repo/design-system/lib/utils";
 import { NotificationsTrigger } from "@repo/notifications/components/trigger";
-import {
-  AnchorIcon,
-  BookOpenIcon,
-  BotIcon,
-  ChevronRightIcon,
-  FolderIcon,
-  FrameIcon,
-  LifeBuoyIcon,
-  MapIcon,
-  MoreHorizontalIcon,
-  PieChartIcon,
-  SendIcon,
-  Settings2Icon,
-  ShareIcon,
-  SquareTerminalIcon,
-  Trash2Icon,
-} from "lucide-react";
+import { SquareTerminalIcon } from "lucide-react";
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { Search } from "./search";
-import { title } from "process";
 
 type GlobalSidebarProperties = {
   readonly children: ReactNode;
@@ -68,7 +31,6 @@ const data = {
     avatar: "/avatars/shadcn.jpg",
   },
   navMain: [
-  
     {
       title: "Dashboard",
       url: "/admin",
@@ -88,15 +50,15 @@ const data = {
       isActive: true,
     },
     {
-    title: "Public calendar",
-    url: "/",
-    icon: SquareTerminalIcon,
-  },
-  {
-    title: "Public docs",
-    url: "/docs",
-    icon: SquareTerminalIcon,
-  },
+      title: "Public calendar",
+      url: "/",
+      icon: SquareTerminalIcon,
+    },
+    {
+      title: "Public docs",
+      url: "/docs",
+      icon: SquareTerminalIcon,
+    },
   ],
 };
 
@@ -108,7 +70,6 @@ export const GlobalSidebar = ({ children }: GlobalSidebarProperties) => {
       <Sidebar variant="inset">
         <SidebarContent>
           <SidebarGroup>
-
             <SidebarMenu>
               {data.navMain.map((item) => (
                 <Collapsible
@@ -123,14 +84,11 @@ export const GlobalSidebar = ({ children }: GlobalSidebarProperties) => {
                         <span>{item.title}</span>
                       </Link>
                     </SidebarMenuButton>
-                  
                   </SidebarMenuItem>
                 </Collapsible>
               ))}
             </SidebarMenu>
           </SidebarGroup>
-    
-      
         </SidebarContent>
         <SidebarFooter>
           <SidebarMenu>

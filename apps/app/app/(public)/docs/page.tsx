@@ -33,7 +33,9 @@ export default async function DocsPage() {
             <BookOpen className="h-8 w-8 text-primary" />
           </div>
           <div>
-            <h1 className="font-bold text-4xl tracking-tight">Knowledge Base</h1>
+            <h1 className="font-bold text-4xl tracking-tight">
+              Knowledge Base
+            </h1>
             <p className="mt-2 text-muted-foreground text-xl">
               Your central hub for community information, guidelines, and
               resources.
@@ -41,7 +43,7 @@ export default async function DocsPage() {
           </div>
         </div>
 
-        <div className="mt-12 grid gap-6 md:grid-cols-2 text-left">
+        <div className="mt-12 grid gap-6 text-left md:grid-cols-2">
           <Card className="group cursor-pointer transition-colors hover:border-primary/50">
             <Link href="/docs/welcome">
               <CardHeader>
@@ -51,7 +53,7 @@ export default async function DocsPage() {
                 <CardTitle className="mt-4">Community Rules</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground text-sm text-left">
+                <p className="text-left text-muted-foreground text-sm">
                   Understand the guidelines, values, and expectations within our
                   community.
                 </p>
@@ -68,7 +70,7 @@ export default async function DocsPage() {
                 <CardTitle className="mt-4">Helpful Guides</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground text-sm text-left">
+                <p className="text-left text-muted-foreground text-sm">
                   Step-by-step instructions and useful tips for all community
                   members.
                 </p>
@@ -85,7 +87,7 @@ export default async function DocsPage() {
                 <CardTitle className="mt-4">Shared Resources</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground text-sm text-left">
+                <p className="text-left text-muted-foreground text-sm">
                   Access important documents, external links, and community
                   assets.
                 </p>
@@ -102,7 +104,7 @@ export default async function DocsPage() {
                 <CardTitle className="mt-4">Safety & FAQ</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground text-sm text-left">
+                <p className="text-left text-muted-foreground text-sm">
                   Frequently asked questions about safety, privacy, and
                   organized events.
                 </p>
@@ -116,9 +118,9 @@ export default async function DocsPage() {
           <div className="grid gap-4 sm:grid-cols-2">
             {docs.map((doc) => (
               <Link
-                key={doc.id}
-                href={`/docs/${doc.slug}`}
                 className="flex items-center gap-3 rounded-lg border bg-card p-4 transition-colors hover:bg-accent hover:text-accent-foreground"
+                href={`/docs/${doc.slug}`}
+                key={doc.id}
               >
                 <FileText className="h-5 w-5 text-muted-foreground" />
                 <span className="font-medium">{doc.title}</span>
@@ -132,7 +134,7 @@ export default async function DocsPage() {
           </div>
         </div>
 
-        <div className="mt-20 border rounded-2xl bg-muted/50 p-8">
+        <div className="mt-20 rounded-2xl border bg-muted/50 p-8">
           <h2 className="mb-4 font-bold text-2xl">Need assistance?</h2>
           <p className="text-muted-foreground">
             Can't find the information you need? Connect with organizers or join

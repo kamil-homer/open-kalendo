@@ -1,12 +1,10 @@
-import { auth } from "@repo/auth/server";
 import { database } from "@repo/database";
-import { format } from "date-fns";
-import { notFound } from "next/navigation";
 import { Badge } from "@repo/design-system/components/ui/badge";
+import { format } from "date-fns";
 import { Header } from "../../components/header";
 import { CreateEventDialog } from "./_components/create-event-dialog";
-import { EditEventDialog } from "./_components/edit-event-dialog";
 import { DeleteEventDialog } from "./_components/delete-event-dialog";
+import { EditEventDialog } from "./_components/edit-event-dialog";
 
 const AdminEventsPage = async () => {
   const events = await database.event.findMany({
@@ -51,10 +49,10 @@ const AdminEventsPage = async () => {
                   <td className="whitespace-nowrap px-6 py-4 font-medium text-sm">
                     {event.title}
                   </td>
-                  <td className="whitespace-nowrap px-6 py-4 text-sm text-muted-foreground">
+                  <td className="whitespace-nowrap px-6 py-4 text-muted-foreground text-sm">
                     {format(new Date(event.date), "PPP p")}
                   </td>
-                  <td className="whitespace-nowrap px-6 py-4 text-sm text-muted-foreground">
+                  <td className="whitespace-nowrap px-6 py-4 text-muted-foreground text-sm">
                     {event.location || "-"}
                   </td>
                   <td className="whitespace-nowrap px-6 py-4 text-sm">
@@ -64,9 +62,12 @@ const AdminEventsPage = async () => {
                       <Badge variant="secondary">Draft</Badge>
                     )}
                   </td>
-                  <td className="whitespace-nowrap px-6 py-4 text-right text-muted-foreground text-sm flex justify-end gap-3">
+                  <td className="flex justify-end gap-3 whitespace-nowrap px-6 py-4 text-right text-muted-foreground text-sm">
                     <EditEventDialog event={event} />
-                    <DeleteEventDialog eventId={event.id} eventTitle={event.title} />
+                    <DeleteEventDialog
+                      eventId={event.id}
+                      eventTitle={event.title}
+                    />
                   </td>
                 </tr>
               ))}
