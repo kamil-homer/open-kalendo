@@ -17,11 +17,11 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { deleteEvent } from "../../../../../actions/events/delete";
 
-interface DeleteEventDialogProps {
+type DeleteEventDialogProps = {
   dict: any;
   eventId: string;
   eventTitle: string;
-}
+};
 
 export function DeleteEventDialog({
   eventId,

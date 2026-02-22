@@ -18,5 +18,18 @@
       "!apps/email/.react-email",
       "!packages/cms/basehub-types.d.ts"
     ]
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "style": {
+        "useConsistentTypeDefinitions": {
+          "level": "error",
+          "options": {
+            "style": "type"
+          }
+        }
+      }
+    }
   }
 }

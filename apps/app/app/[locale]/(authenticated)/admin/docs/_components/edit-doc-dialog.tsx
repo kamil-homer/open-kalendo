@@ -49,7 +49,7 @@ const formSchema = z.object({
   published: z.boolean().default(false),
 });
 
-interface EditDocDialogProps {
+type EditDocDialogProps = {
   dict: any;
   doc: {
     id: string;
@@ -59,7 +59,7 @@ interface EditDocDialogProps {
     link: string | null;
     published: boolean;
   };
-}
+};
 
 export function EditDocDialog({ doc, dict }: EditDocDialogProps) {
   const [open, setOpen] = useState(false);

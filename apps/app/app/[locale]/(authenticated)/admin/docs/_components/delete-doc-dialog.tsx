@@ -17,11 +17,11 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { deleteDoc } from "../../../../../actions/docs/delete";
 
-interface DeleteDocDialogProps {
+type DeleteDocDialogProps = {
   dict: any;
   docId: string;
   docTitle: string;
-}
+};
 
 export function DeleteDocDialog({
   docId,

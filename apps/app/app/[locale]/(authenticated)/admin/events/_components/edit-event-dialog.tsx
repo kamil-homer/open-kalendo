@@ -59,7 +59,7 @@ const formSchema = z.object({
   published: z.boolean().default(false),
 });
 
-interface EditEventDialogProps {
+type EditEventDialogProps = {
   dict: any;
   event: {
     id: string;
@@ -70,7 +70,7 @@ interface EditEventDialogProps {
     link: string | null;
     published: boolean;
   };
-}
+};
 
 export function EditEventDialog({ event, dict }: EditEventDialogProps) {
   const [open, setOpen] = useState(false);
