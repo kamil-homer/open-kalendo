@@ -11,9 +11,26 @@ datasource db {
   relationMode = "prisma"
 }
 
-// This is a stub model.
-// Delete it and add your own Prisma models.
-model Page {
-  id   Int    @id @default(autoincrement())
-  name String
+model Event {
+  id          String   @id @default(cuid())
+  title       String
+  description String?  @db.Text
+  date        DateTime
+  location    String?
+  link        String?  // np. do zapisu albo na Teams/Zoom
+  published   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([date])
+}
+
+model Article { // baza wiedzy
+  id        String   @id @default(cuid())
+  title     String
+  link      String?  // np. do regulaminu konkursu na stronie
+  slug      String   @unique
+  content   Json     // rich text z edytora
+  published Boolean  @default(false)
+  createdAt DateTime @default(now())
 }

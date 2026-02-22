@@ -22,10 +22,11 @@ export const generateMetadata = async ({
 
 const SearchPage = async ({ searchParams }: SearchPageProperties) => {
   const { q } = await searchParams;
-  const pages = await database.page.findMany({
+  const articles = await database.article.findMany({
     where: {
-      name: {
+      title: {
         contains: q,
+        mode: "insensitive",
       },
     },
   });
@@ -44,11 +45,17 @@ const SearchPage = async ({ searchParams }: SearchPageProperties) => {
       <Header page="Search" pages={["Building Your Application"]} />
       <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
         <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-          {pages.map((page) => (
-            <div className="aspect-video rounded-xl bg-muted/50" key={page.id}>
-              {page.name}
+          {articles.map((article) => (
+            <div className="aspect-video rounded-xl bg-muted/50 p-4 border" key={article.id}>
+              <h3 className="font-semibold">{article.title}</h3>
+              <p className="text-sm text-muted-foreground line-clamp-2">Click to read more...</p>
             </div>
           ))}
+          {articles.length === 0 && (
+            <div className="col-span-full text-center py-10 text-muted-foreground">
+              No results found for "{q}"
+            </div>
+          )}
         </div>
         <div className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min" />
       </div>
