@@ -14,8 +14,17 @@ import {
   Zap,
 } from "lucide-react";
 import Link from "next/link";
+import { getDictionary } from "@repo/internationalization";
 
-export default async function DocsPage() {
+type Props = {
+  params: Promise<{
+    locale: string;
+  }>;
+};
+
+export default async function DocsPage(props: Props) {
+  const params = await props.params;
+  const dict = await getDictionary(params.locale);
   const docs = await database.doc.findMany({
     where: {
       published: true,
@@ -34,87 +43,16 @@ export default async function DocsPage() {
           </div>
           <div>
             <h1 className="font-bold text-4xl tracking-tight">
-              Knowledge Base
+              {dict.app.public.docs.title}
             </h1>
             <p className="mt-2 text-muted-foreground text-xl">
-              Your central hub for community information, guidelines, and
-              resources.
+              {dict.app.public.docs.description}
             </p>
           </div>
         </div>
 
-        <div className="mt-12 grid gap-6 text-left md:grid-cols-2">
-          <Card className="group cursor-pointer transition-colors hover:border-primary/50">
-            <Link href="/docs/welcome">
-              <CardHeader>
-                <div className="w-fit rounded-lg bg-blue-500/10 p-2 transition-colors group-hover:bg-blue-500/20">
-                  <Rocket className="h-5 w-5 text-blue-500" />
-                </div>
-                <CardTitle className="mt-4">Community Rules</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-left text-muted-foreground text-sm">
-                  Understand the guidelines, values, and expectations within our
-                  community.
-                </p>
-              </CardContent>
-            </Link>
-          </Card>
-
-          <Card className="group cursor-pointer transition-colors hover:border-primary/50">
-            <Link href="/docs/guides">
-              <CardHeader>
-                <div className="w-fit rounded-lg bg-orange-500/10 p-2 transition-colors group-hover:bg-orange-500/20">
-                  <Zap className="h-5 w-5 text-orange-500" />
-                </div>
-                <CardTitle className="mt-4">Helpful Guides</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-left text-muted-foreground text-sm">
-                  Step-by-step instructions and useful tips for all community
-                  members.
-                </p>
-              </CardContent>
-            </Link>
-          </Card>
-
-          <Card className="group cursor-pointer transition-colors hover:border-primary/50">
-            <Link href="/docs/resources">
-              <CardHeader>
-                <div className="w-fit rounded-lg bg-purple-500/10 p-2 transition-colors group-hover:bg-purple-500/20">
-                  <CommandIcon className="h-5 w-5 text-purple-500" />
-                </div>
-                <CardTitle className="mt-4">Shared Resources</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-left text-muted-foreground text-sm">
-                  Access important documents, external links, and community
-                  assets.
-                </p>
-              </CardContent>
-            </Link>
-          </Card>
-
-          <Card className="group cursor-pointer transition-colors hover:border-primary/50">
-            <Link href="/docs/faq">
-              <CardHeader>
-                <div className="w-fit rounded-lg bg-green-500/10 p-2 transition-colors group-hover:bg-green-500/20">
-                  <Shield className="h-5 w-5 text-green-500" />
-                </div>
-                <CardTitle className="mt-4">Safety & FAQ</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-left text-muted-foreground text-sm">
-                  Frequently asked questions about safety, privacy, and
-                  organized events.
-                </p>
-              </CardContent>
-            </Link>
-          </Card>
-        </div>
-
         <div className="mt-20">
-          <h2 className="mb-6 font-bold text-2xl">Browse Knowledge Base</h2>
+          <h2 className="mb-6 font-bold text-2xl">{dict.app.public.docs.browseTitle}</h2>
           <div className="grid gap-4 sm:grid-cols-2">
             {docs.map((doc) => (
               <Link
@@ -128,25 +66,9 @@ export default async function DocsPage() {
             ))}
             {docs.length === 0 && (
               <p className="col-span-2 text-muted-foreground italic">
-                No articles published yet.
+                {dict.app.public.docs.noArticles}
               </p>
             )}
-          </div>
-        </div>
-
-        <div className="mt-20 rounded-2xl border bg-muted/50 p-8">
-          <h2 className="mb-4 font-bold text-2xl">Need assistance?</h2>
-          <p className="text-muted-foreground">
-            Can't find the information you need? Connect with organizers or join
-            our community discussion.
-          </p>
-          <div className="mt-6 flex gap-4">
-            <button className="rounded-lg bg-primary px-6 py-2 font-medium text-primary-foreground transition-colors hover:bg-primary/90">
-              Community Chat
-            </button>
-            <button className="rounded-lg border bg-background px-6 py-2 font-medium transition-colors hover:bg-muted">
-              Contact Organizers
-            </button>
           </div>
         </div>
       </div>

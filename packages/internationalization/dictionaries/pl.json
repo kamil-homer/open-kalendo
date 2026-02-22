@@ -195,6 +195,12 @@
         "details": "Szczegóły",
         "noEvents": "Brak nadchodzących wydarzeń",
         "checkLater": "Zajrzyj do nas później!"
+      },
+      "docs": {
+        "title": "Baza Wiedzy",
+        "description": "Twoje główne centrum informacji o społeczności, wskazówek i zasobów.",
+        "browseTitle": "Przeglądaj Bazę Wiedzy",
+        "noArticles": "Brak opublikowanych artykułów."
       }
     },
     "admin": {

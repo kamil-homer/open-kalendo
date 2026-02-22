@@ -195,6 +195,12 @@
         "details": "Details",
         "noEvents": "No upcoming events",
         "checkLater": "Check back later!"
+      },
+      "docs": {
+        "title": "Knowledge Base",
+        "description": "Your central hub for community information, guidelines, and resources.",
+        "browseTitle": "Browse Knowledge Base",
+        "noArticles": "No articles published yet."
       }
     },
     "admin": {
