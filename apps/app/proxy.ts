@@ -16,10 +16,12 @@ const securityHeaders = env.FLAGS_SECRET
 const isPublicRoute = createRouteMatcher([
   "/",
   "/docs(.*)",
+  "/events(.*)",
   "/sign-in(.*)",
   "/sign-up(.*)",
   "/:locale",
   "/:locale/docs(.*)",
+  "/:locale/events(.*)",
   "/:locale/sign-in(.*)",
   "/:locale/sign-up(.*)",
 ]);
