@@ -2,7 +2,10 @@ import { type ApiData, verifyAccess } from "flags";
 import { type NextRequest, NextResponse } from "next/server";
 import * as flags from "./index";
 
-export const getFlags = async (request: NextRequest) => {
+export const getFlags = async (
+  request: NextRequest,
+  _context: { params: Promise<{}> }
+) => {
   const access = await verifyAccess(request.headers.get("Authorization"));
 
   if (!access) {
