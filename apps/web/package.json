@@ -36,7 +36,7 @@
     "react-dom": "19.2.1",
     "require-in-the-middle": "8.0.1",
     "sharp": "^0.34.5",
-    "shiki": "^3.19.0",
+    "shiki": "^3.22.0",
     "zod": "^4.1.13"
   },
   "devDependencies": {
