@@ -5,6 +5,7 @@ import { CommandIcon } from "lucide-react";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { LanguageSwitcher } from "./components/language-switcher";
+import { MobileNav } from "./components/mobile-nav";
 
 type PublicLayoutProps = {
   readonly children: ReactNode;
@@ -21,11 +22,14 @@ const PublicLayout = async ({ children, params }: PublicLayoutProps) => {
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container mx-auto flex h-14 items-center justify-between px-4">
           <div className="flex items-center gap-4">
+            <MobileNav t={t} userId={userId} />
             <Link className="flex items-center space-x-2" href="/">
               <CommandIcon className="h-6 w-6" />
-              <span className="inline-block font-bold">Open Kalendo</span>
+              <span className="inline-block font-bold truncate max-w-[120px] sm:max-w-none">
+                Open Kalendo
+              </span>
             </Link>
-            <nav className="flex items-center space-x-6 font-medium text-sm">
+            <nav className="hidden md:flex items-center space-x-6 font-medium text-sm">
               <Link
                 className="text-foreground/60 transition-colors hover:text-foreground/80"
                 href="/"
@@ -40,9 +44,11 @@ const PublicLayout = async ({ children, params }: PublicLayoutProps) => {
               </Link>
             </nav>
           </div>
-          <div className="flex items-center space-x-4">
-            <LanguageSwitcher />
-            <ModeToggle />
+          <div className="flex items-center space-x-2 sm:space-x-4">
+            <div className="hidden sm:flex items-center space-x-2 sm:space-x-4">
+              <LanguageSwitcher />
+              <ModeToggle />
+            </div>
             {userId ? (
               <Link
                 className="inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 py-2 font-medium text-primary-foreground text-sm shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
