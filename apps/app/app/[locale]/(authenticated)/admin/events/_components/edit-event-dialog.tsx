@@ -69,9 +69,10 @@ interface EditEventDialogProps {
     link: string | null;
     published: boolean;
   };
+  dict: any;
 }
 
-export function EditEventDialog({ event }: EditEventDialogProps) {
+export function EditEventDialog({ event, dict }: EditEventDialogProps) {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -125,14 +126,14 @@ export function EditEventDialog({ event }: EditEventDialogProps) {
       <DialogTrigger asChild>
         <button className="inline-flex items-center gap-1 text-primary hover:underline">
           <Pencil className="h-4 w-4" />
-          Edit
+          {dict.trigger}
         </button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[525px]">
         <DialogHeader>
-          <DialogTitle>Edit Event</DialogTitle>
+          <DialogTitle>{dict.title}</DialogTitle>
           <DialogDescription>
-            Update the details of your event below.
+            {dict.description}
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
@@ -270,7 +271,7 @@ export function EditEventDialog({ event }: EditEventDialogProps) {
             <DialogFooter>
               <Button disabled={loading} type="submit">
                 {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                Save Changes
+                {loading ? dict.saving : dict.save}
               </Button>
             </DialogFooter>
           </form>

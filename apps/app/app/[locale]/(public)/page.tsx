@@ -1,19 +1,31 @@
 import { database } from "@repo/database";
 import { format, startOfDay } from "date-fns";
-import { pl } from "date-fns/locale";
+import { enUS, pl } from "date-fns/locale";
 import type { Metadata } from "next";
+import { getDictionary } from "@repo/internationalization";
 
 import Link from "next/link";
 
-const title = "Open Kalendo";
-const description = "Open-source events and docs management for communities.";
-
-export const metadata: Metadata = {
-  title,
-  description,
+type Props = {
+  params: Promise<{
+    locale: string;
+  }>;
 };
 
-const App = async () => {
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const params = await props.params;
+  const dict = await getDictionary(params.locale);
+  return {
+    title: dict.app.public.page.title,
+    description: dict.app.public.page.description,
+  };
+}
+
+const App = async (props: Props) => {
+  const params = await props.params;
+  const dict = await getDictionary(params.locale);
+  const dateLocale = params.locale === "pl" ? pl : enUS;
+
   const now = new Date();
   const today = startOfDay(now);
 
@@ -32,8 +44,8 @@ const App = async () => {
   // Group events by month and then by day
   const groupedEvents = events.reduce(
     (acc, event) => {
-      const month = format(event.date, "LLLL yyyy", { locale: pl });
-      const day = format(event.date, "EEEE, d", { locale: pl });
+      const month = format(event.date, "LLLL yyyy", { locale: dateLocale });
+      const day = format(event.date, "EEEE, d", { locale: dateLocale });
 
       if (!acc[month]) {
         acc[month] = {};
@@ -51,9 +63,9 @@ const App = async () => {
     <div className="container mx-auto max-w-3xl p-6">
       <header className="mb-10">
         <h1 className="mb-2 font-extrabold text-3xl text-primary tracking-tight">
-          {title}
+          {dict.app.public.page.title}
         </h1>
-        <p className="text-muted-foreground">{description}</p>
+        <p className="text-muted-foreground">{dict.app.public.page.description}</p>
       </header>
 
       {events.length > 0 ? (
@@ -90,7 +102,7 @@ const App = async () => {
                             <div className="flex flex-wrap items-center gap-3 font-medium text-muted-foreground text-xs">
                               <span className="flex items-center gap-1">
                                 <span className="text-foreground/50">⏰</span>
-                                {format(event.date, "HH:mm", { locale: pl })}
+                                {format(event.date, "HH:mm", { locale: dateLocale })}
                               </span>
                               {event.location && (
                                 <span className="flex items-center gap-1">
@@ -109,14 +121,14 @@ const App = async () => {
                                 rel="noopener noreferrer"
                                 target="_blank"
                               >
-                                Idź na stronę wydarzenia
+                                {dict.app.public.page.goToEventPage}
                               </a>
                             )}
                             <Link
                               className="inline-flex h-8 items-center justify-center rounded-lg bg-secondary px-4 font-bold text-secondary-foreground text-xs transition-all hover:bg-secondary/90 focus:outline-none focus:ring-2 focus:ring-secondary/20 active:scale-95"
                               href={`/events/${event.id}`}
                             >
-                              Szczegóły
+                              {dict.app.public.page.details}
                             </Link>
                           </div>
                         </li>
@@ -132,10 +144,10 @@ const App = async () => {
         <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed bg-muted/20 py-16 text-center">
           <div className="mb-3 text-4xl">🗓️</div>
           <p className="font-semibold text-foreground">
-            Brak nadchodzących wydarzeń
+            {dict.app.public.page.noEvents}
           </p>
           <p className="mt-1 text-muted-foreground text-sm">
-            Zajrzyj do nas później!
+            {dict.app.public.page.checkLater}
           </p>
         </div>
       )}

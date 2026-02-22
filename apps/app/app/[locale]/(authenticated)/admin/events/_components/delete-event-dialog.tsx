@@ -20,11 +20,13 @@ import { deleteEvent } from "../../../../../actions/events/delete";
 interface DeleteEventDialogProps {
   eventId: string;
   eventTitle: string;
+  dict: any;
 }
 
 export function DeleteEventDialog({
   eventId,
   eventTitle,
+  dict,
 }: DeleteEventDialogProps) {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -51,23 +53,22 @@ export function DeleteEventDialog({
       <AlertDialogTrigger asChild>
         <button className="inline-flex items-center gap-1 text-destructive hover:underline">
           <Trash2 className="h-4 w-4" />
-          Delete
+          {dict.trigger}
         </button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+          <AlertDialogTitle>{dict.title}</AlertDialogTitle>
           <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete the event
+            {dict.description}
             <span className="font-semibold text-foreground">
               {" "}
               "{eventTitle}"
             </span>
-            .
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel disabled={loading}>Cancel</AlertDialogCancel>
+          <AlertDialogCancel disabled={loading}>{dict.cancel}</AlertDialogCancel>
           <AlertDialogAction
             className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
             disabled={loading}
@@ -77,7 +78,7 @@ export function DeleteEventDialog({
             }}
           >
             {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-            Delete
+            {loading ? dict.deleting : dict.confirm}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

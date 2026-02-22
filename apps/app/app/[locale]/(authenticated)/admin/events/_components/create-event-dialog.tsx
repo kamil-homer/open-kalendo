@@ -59,7 +59,7 @@ const formSchema = z.object({
   published: z.boolean().default(false),
 });
 
-export function CreateEventDialog() {
+export function CreateEventDialog({ dict }: { dict: any }) {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -113,14 +113,14 @@ export function CreateEventDialog() {
       <DialogTrigger asChild>
         <Button>
           <Plus className="mr-2 h-4 w-4" />
-          Create New Event
+          {dict.trigger}
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[525px]">
         <DialogHeader>
-          <DialogTitle>Create Event</DialogTitle>
+          <DialogTitle>{dict.title}</DialogTitle>
           <DialogDescription>
-            Fill in the details below to create a new event.
+            {dict.description}
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
@@ -258,7 +258,7 @@ export function CreateEventDialog() {
             <DialogFooter>
               <Button disabled={loading} type="submit">
                 {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                Create Event
+                {loading ? dict.submitting : dict.submit}
               </Button>
             </DialogFooter>
           </form>

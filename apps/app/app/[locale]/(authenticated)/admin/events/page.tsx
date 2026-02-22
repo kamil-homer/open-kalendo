@@ -1,12 +1,23 @@
 import { database } from "@repo/database";
 import { Badge } from "@repo/design-system/components/ui/badge";
 import { format } from "date-fns";
+import { enUS, pl } from "date-fns/locale";
+import { getDictionary } from "@repo/internationalization";
 import { Header } from "../../components/header";
 import { CreateEventDialog } from "./_components/create-event-dialog";
 import { DeleteEventDialog } from "./_components/delete-event-dialog";
 import { EditEventDialog } from "./_components/edit-event-dialog";
 
-const AdminEventsPage = async () => {
+type Props = {
+  params: Promise<{
+    locale: string;
+  }>;
+};
+
+const AdminEventsPage = async (props: Props) => {
+  const params = await props.params;
+  const dict = await getDictionary(params.locale);
+  const dateLocale = params.locale === "pl" ? pl : enUS;
   const events = await database.event.findMany({
     orderBy: {
       date: "desc",
@@ -15,11 +26,11 @@ const AdminEventsPage = async () => {
 
   return (
     <>
-      <Header page="Events Management" pages={["Admin", "Events"]} />
+      <Header page={dict.app.admin.events.page.headerTitle} pages={[dict.app.admin.events.page.headerAdmin, dict.app.admin.events.page.headerEvents]} />
       <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
         <div className="flex items-center justify-between">
-          <h1 className="font-bold text-2xl">Manage Events</h1>
-          <CreateEventDialog />
+          <h1 className="font-bold text-2xl">{dict.app.admin.events.page.manageEvents}</h1>
+          <CreateEventDialog dict={dict.app.admin.events.createDialog} />
         </div>
 
         <div className="overflow-hidden rounded-md border">
@@ -27,19 +38,19 @@ const AdminEventsPage = async () => {
             <thead className="bg-muted">
               <tr>
                 <th className="px-6 py-3 text-left font-medium text-muted-foreground text-xs uppercase tracking-wider">
-                  Title
+                  {dict.app.admin.events.page.table.title}
                 </th>
                 <th className="px-6 py-3 text-left font-medium text-muted-foreground text-xs uppercase tracking-wider">
-                  Date
+                  {dict.app.admin.events.page.table.date}
                 </th>
                 <th className="px-6 py-3 text-left font-medium text-muted-foreground text-xs uppercase tracking-wider">
-                  Location
+                  {dict.app.admin.events.page.table.location}
                 </th>
                 <th className="px-6 py-3 text-left font-medium text-muted-foreground text-xs uppercase tracking-wider">
-                  Status
+                  {dict.app.admin.events.page.table.status}
                 </th>
                 <th className="px-6 py-3 text-right font-medium text-muted-foreground text-xs uppercase tracking-wider">
-                  Actions
+                  {dict.app.admin.events.page.table.actions}
                 </th>
               </tr>
             </thead>
@@ -50,21 +61,22 @@ const AdminEventsPage = async () => {
                     {event.title}
                   </td>
                   <td className="whitespace-nowrap px-6 py-4 text-muted-foreground text-sm">
-                    {format(new Date(event.date), "PPP p")}
+                    {format(new Date(event.date), "PPP p", { locale: dateLocale })}
                   </td>
                   <td className="whitespace-nowrap px-6 py-4 text-muted-foreground text-sm">
                     {event.location || "-"}
                   </td>
                   <td className="whitespace-nowrap px-6 py-4 text-sm">
                     {event.published ? (
-                      <Badge variant="default">Published</Badge>
+                      <Badge variant="default">{dict.app.admin.events.page.table.published}</Badge>
                     ) : (
-                      <Badge variant="secondary">Draft</Badge>
+                      <Badge variant="secondary">{dict.app.admin.events.page.table.draft}</Badge>
                     )}
                   </td>
                   <td className="flex justify-end gap-3 whitespace-nowrap px-6 py-4 text-right text-muted-foreground text-sm">
-                    <EditEventDialog event={event} />
+                    <EditEventDialog dict={dict.app.admin.events.editDialog} event={event} />
                     <DeleteEventDialog
+                      dict={dict.app.admin.events.deleteDialog}
                       eventId={event.id}
                       eventTitle={event.title}
                     />
@@ -78,7 +90,7 @@ const AdminEventsPage = async () => {
                     className="px-6 py-10 text-center text-muted-foreground"
                     colSpan={5}
                   >
-                    No events managed yet.
+                    {dict.app.admin.events.page.table.noEvents}
                   </td>
                 </tr>
               )}

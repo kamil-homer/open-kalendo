@@ -19,9 +19,11 @@ import { NotificationsTrigger } from "@repo/notifications/components/trigger";
 import { SquareTerminalIcon } from "lucide-react";
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { LanguageSwitcher } from "../../(public)/components/language-switcher";
 
 type GlobalSidebarProperties = {
   readonly children: ReactNode;
+  readonly dict: any;
 };
 
 const data = {
@@ -29,41 +31,42 @@ const data = {
     name: "shadcn",
     email: "m@example.com",
     avatar: "/avatars/shadcn.jpg",
-  },
-  navMain: [
+  }
+};
+
+export const GlobalSidebar = ({ children, dict }: GlobalSidebarProperties) => {
+  const sidebar = useSidebar();
+  
+  const navMain = [
     {
-      title: "Dashboard",
+      title: dict.dashboard,
       url: "/admin",
       icon: SquareTerminalIcon,
       isActive: true,
     },
     {
-      title: "Events",
+      title: dict.events,
       url: "/admin/events",
       icon: SquareTerminalIcon,
       isActive: true,
     },
     {
-      title: "Docs",
+      title: dict.docs,
       url: "/admin/docs",
       icon: SquareTerminalIcon,
       isActive: true,
     },
     {
-      title: "Public calendar",
+      title: dict.publicCalendar,
       url: "/",
       icon: SquareTerminalIcon,
     },
     {
-      title: "Public docs",
+      title: dict.publicDocs,
       url: "/docs",
       icon: SquareTerminalIcon,
     },
-  ],
-};
-
-export const GlobalSidebar = ({ children }: GlobalSidebarProperties) => {
-  const sidebar = useSidebar();
+  ];
 
   return (
     <>
@@ -71,7 +74,7 @@ export const GlobalSidebar = ({ children }: GlobalSidebarProperties) => {
         <SidebarContent>
           <SidebarGroup>
             <SidebarMenu>
-              {data.navMain.map((item) => (
+              {navMain.map((item) => (
                 <Collapsible
                   asChild
                   defaultOpen={item.isActive}
@@ -104,6 +107,7 @@ export const GlobalSidebar = ({ children }: GlobalSidebarProperties) => {
                 showName
               />
               <div className="flex shrink-0 items-center gap-px">
+                <LanguageSwitcher />
                 <ModeToggle />
                 <Button
                   asChild

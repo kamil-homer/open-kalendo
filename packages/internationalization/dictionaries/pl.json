@@ -185,5 +185,66 @@
         }
       }
     }
+  },
+  "app": {
+    "public": {
+      "page": {
+        "title": "Open Kalendo",
+        "description": "Open-source'owe zarządzanie wydarzeniami i dokumentacją dla społeczności.",
+        "goToEventPage": "Idź na stronę wydarzenia",
+        "details": "Szczegóły",
+        "noEvents": "Brak nadchodzących wydarzeń",
+        "checkLater": "Zajrzyj do nas później!"
+      }
+    },
+    "admin": {
+      "events": {
+        "page": {
+          "headerTitle": "Zarządzanie Wydarzeniami",
+          "headerAdmin": "Admin",
+          "headerEvents": "Wydarzenia",
+          "manageEvents": "Zarządzaj Wydarzeniami",
+          "table": {
+            "title": "Tytuł",
+            "date": "Data",
+            "location": "Lokalizacja",
+            "status": "Status",
+            "actions": "Akcje",
+            "published": "Opublikowane",
+            "draft": "Szkic",
+            "noEvents": "Brak zarządzanych wydarzeń."
+          }
+        },
+        "createDialog": {
+          "trigger": "Utwórz Wydarzenie",
+          "title": "Utwórz Nowe Wydarzenie",
+          "description": "Wypełnij poniższe szczegóły, aby dodać nowe wydarzenie do harmonogramu.",
+          "submit": "Utwórz Wydarzenie",
+          "submitting": "Tworzenie..."
+        },
+        "editDialog": {
+          "trigger": "Edytuj",
+          "title": "Edytuj Wydarzenie",
+          "description": "Modyfikuj szczegóły wydarzenia poniżej.",
+          "save": "Zapisz Zmiany",
+          "saving": "Zapisywanie..."
+        },
+        "deleteDialog": {
+          "trigger": "Usuń",
+          "title": "Usuń Wydarzenie",
+          "description": "Czy na pewno chcesz usunąć to wydarzenie? Tej akcji nie można cofnąć.",
+          "confirm": "Usuń Wydarzenie",
+          "deleting": "Usuwanie...",
+          "cancel": "Anuluj"
+        }
+      },
+      "sidebar": {
+        "dashboard": "Pulpit",
+        "events": "Wydarzenia",
+        "docs": "Dokumentacja",
+        "publicCalendar": "Kalendarz publiczny",
+        "publicDocs": "Dokumentacja publiczna"
+      }
+    }
   }
 }
