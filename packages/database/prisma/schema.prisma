@@ -17,7 +17,7 @@ model Event {
   description String?  @db.Text
   date        DateTime
   location    String?
-  link        String?  // np. do zapisu albo na Teams/Zoom
+  link        String?  
   published   Boolean  @default(false)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
@@ -26,12 +26,12 @@ model Event {
   @@map("event")
 }
 
-model Doc { // baza wiedzy
+model Doc {
   id        String   @id @default(cuid(2))
   title     String
-  link      String?  // np. do regulaminu konkursu na stronie
+  link      String?  
   slug      String   @unique
-  content   Json     // rich text z edytora
+  content   Json     
   published Boolean  @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

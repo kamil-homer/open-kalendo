@@ -69,8 +69,8 @@ const PublicLayout = async ({ children, params }: PublicLayoutProps) => {
             <Link
               className="font-medium underline underline-offset-4 hover:text-primary"
               href="https://github.com/kamil-homer/open-kalendo"
-              target="_blank"
               rel="noopener noreferrer"
+              target="_blank"
             >
               {t.app.public.layout.footer.github}
             </Link>

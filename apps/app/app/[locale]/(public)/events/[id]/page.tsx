@@ -1,10 +1,16 @@
+import { getDictionary } from "@repo/internationalization";
 import { format } from "date-fns";
 import { enUS, pl } from "date-fns/locale";
-import { ChevronLeft, Calendar, Clock, ExternalLink, MapPin } from "lucide-react";
+import {
+  Calendar,
+  ChevronLeft,
+  Clock,
+  ExternalLink,
+  MapPin,
+} from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getEventById } from "../../../../actions/events/get";
-import { getDictionary } from "@repo/internationalization";
 
 type EventPageProps = {
   params: Promise<{
