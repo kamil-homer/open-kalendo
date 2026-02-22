@@ -5,7 +5,7 @@ import { revalidatePath } from "next/cache";
 
 export const deleteDoc = async (id: string) => {
   try {
-    const article = await database.docs.delete({
+    const article = await database.doc.delete({
       where: { id },
     });
 

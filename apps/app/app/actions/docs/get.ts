@@ -4,7 +4,7 @@ import { database } from "@repo/database";
 
 export const getDocs = async () => {
   try {
-    const articles = await database.docs.findMany({
+    const articles = await database.doc.findMany({
       orderBy: {
         createdAt: "desc",
       },
@@ -18,7 +18,7 @@ export const getDocs = async () => {
 
 export const getDocBySlug = async (slug: string) => {
   try {
-    const doc = await database.docs.findUnique({
+    const doc = await database.doc.findUnique({
       where: { slug },
     });
 
@@ -30,7 +30,7 @@ export const getDocBySlug = async (slug: string) => {
 
 export const getDocById = async (id: string) => {
   try {
-    const doc = await database.docs.findUnique({
+    const doc = await database.doc.findUnique({
       where: { id },
     });
 

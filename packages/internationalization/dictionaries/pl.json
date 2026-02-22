@@ -244,6 +244,46 @@
           "cancel": "Anuluj"
         }
       },
+      "docs": {
+        "page": {
+          "headerTitle": "Zarządzanie Dokumentacją",
+          "headerAdmin": "Admin",
+          "headerDocs": "Dokumentacja",
+          "manageDocs": "Zarządzaj Dokumentacją",
+          "table": {
+            "title": "Tytuł",
+            "slug": "Slug",
+            "link": "Link",
+            "status": "Status",
+            "actions": "Akcje",
+            "published": "Opublikowane",
+            "draft": "Szkic",
+            "noDocs": "Brak zarządzanej dokumentacji."
+          }
+        },
+        "createDialog": {
+          "trigger": "Utwórz Dokument",
+          "title": "Utwórz Nowy Dokument",
+          "description": "Wypełnij poniższe szczegóły, aby dodać nowy dokument do bazy wiedzy.",
+          "submit": "Utwórz Dokument",
+          "submitting": "Tworzenie..."
+        },
+        "editDialog": {
+          "trigger": "Edytuj",
+          "title": "Edytuj Dokument",
+          "description": "Modyfikuj szczegóły dokumentu poniżej.",
+          "save": "Zapisz Zmiany",
+          "saving": "Zapisywanie..."
+        },
+        "deleteDialog": {
+          "trigger": "Usuń",
+          "title": "Usuń Dokument",
+          "description": "Czy na pewno chcesz usunąć ten dokument? Tej akcji nie można cofnąć.",
+          "confirm": "Usuń Dokument",
+          "deleting": "Usuwanie...",
+          "cancel": "Anuluj"
+        }
+      },
       "sidebar": {
         "dashboard": "Pulpit",
         "events": "Wydarzenia",

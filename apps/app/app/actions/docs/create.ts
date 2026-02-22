@@ -11,7 +11,7 @@ export const createDoc = async (data: {
   published?: boolean;
 }) => {
   try {
-    const doc = await database.docs.create({
+    const doc = await database.doc.create({
       data,
     });
 

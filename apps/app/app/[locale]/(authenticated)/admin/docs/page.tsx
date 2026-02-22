@@ -1,43 +1,60 @@
 import { database } from "@repo/database";
+import { Badge } from "@repo/design-system/components/ui/badge";
+import { getDictionary } from "@repo/internationalization";
 import { Header } from "../../components/header";
+import { CreateDocDialog } from "./_components/create-doc-dialog";
+import { DeleteDocDialog } from "./_components/delete-doc-dialog";
+import { EditDocDialog } from "./_components/edit-doc-dialog";
 
-const AdminDocsPage = async () => {
+type Props = {
+  params: Promise<{
+    locale: string;
+  }>;
+};
+
+const AdminDocsPage = async (props: Props) => {
+  const params = await props.params;
+  const dict = await getDictionary(params.locale);
   const docs = await database.doc.findMany({
     orderBy: {
-      updatedAt: "desc",
+      createdAt: "desc",
     },
   });
 
   return (
     <>
-      <Header page="Docs Management" pages={["Admin", "Docs"]} />
+      <Header 
+        page={dict.app.admin.docs.page.headerTitle} 
+        pages={[dict.app.admin.docs.page.headerAdmin, dict.app.admin.docs.page.headerDocs]} 
+      />
       <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
         <div className="flex items-center justify-between">
-          <h1 className="font-bold text-2xl">Manage Documents</h1>
-          <button className="rounded-md bg-primary px-4 py-2 text-primary-foreground transition-colors hover:bg-primary/90">
-            Create New Doc
-          </button>
+          <h1 className="font-bold text-2xl">{dict.app.admin.docs.page.manageDocs}</h1>
+          <CreateDocDialog dict={dict.app.admin.docs.createDialog} />
         </div>
 
-        <div className="overflow-hidden rounded-md border bg-background">
+        <div className="overflow-hidden rounded-md border">
           <table className="min-w-full divide-y divide-border">
             <thead className="bg-muted">
               <tr>
                 <th className="px-6 py-3 text-left font-medium text-muted-foreground text-xs uppercase tracking-wider">
-                  Title
+                  {dict.app.admin.docs.page.table.title}
                 </th>
                 <th className="px-6 py-3 text-left font-medium text-muted-foreground text-xs uppercase tracking-wider">
-                  Slug
+                  {dict.app.admin.docs.page.table.slug}
                 </th>
                 <th className="px-6 py-3 text-left font-medium text-muted-foreground text-xs uppercase tracking-wider">
-                  Status
+                  {dict.app.admin.docs.page.table.link}
                 </th>
                 <th className="px-6 py-3 text-left font-medium text-muted-foreground text-xs uppercase tracking-wider">
-                  Actions
+                  {dict.app.admin.docs.page.table.status}
+                </th>
+                <th className="px-6 py-3 text-right font-medium text-muted-foreground text-xs uppercase tracking-wider">
+                  {dict.app.admin.docs.page.table.actions}
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-border">
+            <tbody className="divide-y divide-border bg-background">
               {docs.map((doc) => (
                 <tr key={doc.id}>
                   <td className="whitespace-nowrap px-6 py-4 font-medium text-sm">
@@ -46,34 +63,34 @@ const AdminDocsPage = async () => {
                   <td className="whitespace-nowrap px-6 py-4 text-muted-foreground text-sm">
                     {doc.slug}
                   </td>
+                  <td className="whitespace-nowrap px-6 py-4 text-muted-foreground text-sm">
+                    {doc.link || "-"}
+                  </td>
                   <td className="whitespace-nowrap px-6 py-4 text-sm">
                     {doc.published ? (
-                      <span className="inline-flex rounded-full bg-green-100 px-2 font-semibold text-green-800 text-xs leading-5 dark:bg-green-900/30 dark:text-green-400">
-                        Published
-                      </span>
+                      <Badge variant="default">{dict.app.admin.docs.page.table.published}</Badge>
                     ) : (
-                      <span className="inline-flex rounded-full bg-yellow-100 px-2 font-semibold text-xs text-yellow-800 leading-5 dark:bg-yellow-900/30 dark:text-yellow-400">
-                        Draft
-                      </span>
+                      <Badge variant="secondary">{dict.app.admin.docs.page.table.draft}</Badge>
                     )}
                   </td>
-                  <td className="whitespace-nowrap px-6 py-4 text-muted-foreground text-sm">
-                    <button className="mr-4 text-primary hover:underline">
-                      Edit
-                    </button>
-                    <button className="text-destructive hover:underline">
-                      Delete
-                    </button>
+                  <td className="flex justify-end gap-3 whitespace-nowrap px-6 py-4 text-right text-muted-foreground text-sm">
+                    <EditDocDialog dict={dict.app.admin.docs.editDialog} doc={doc} />
+                    <DeleteDocDialog
+                      dict={dict.app.admin.docs.deleteDialog}
+                      docId={doc.id}
+                      docTitle={doc.title}
+                    />
                   </td>
                 </tr>
               ))}
+
               {docs.length === 0 && (
                 <tr>
                   <td
                     className="px-6 py-10 text-center text-muted-foreground"
-                    colSpan={4}
+                    colSpan={5}
                   >
-                    No documents found.
+                    {dict.app.admin.docs.page.table.noDocs}
                   </td>
                 </tr>
               )}

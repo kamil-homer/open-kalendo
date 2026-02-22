@@ -14,7 +14,7 @@ export const updateDoc = async (
   }
 ) => {
   try {
-    const doc = await database.docs.update({
+    const doc = await database.doc.update({
       where: { id },
       data,
     });

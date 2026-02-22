@@ -244,6 +244,46 @@
           "cancel": "Cancel"
         }
       },
+      "docs": {
+        "page": {
+          "headerTitle": "Documentation Management",
+          "headerAdmin": "Admin",
+          "headerDocs": "Documentation",
+          "manageDocs": "Manage Documentation",
+          "table": {
+            "title": "Title",
+            "slug": "Slug",
+            "link": "Link",
+            "status": "Status",
+            "actions": "Actions",
+            "published": "Published",
+            "draft": "Draft",
+            "noDocs": "No documentation managed yet."
+          }
+        },
+        "createDialog": {
+          "trigger": "Create Document",
+          "title": "Create a New Document",
+          "description": "Fill out the details below to add a new document to the knowledge base.",
+          "submit": "Create Document",
+          "submitting": "Creating..."
+        },
+        "editDialog": {
+          "trigger": "Edit",
+          "title": "Edit Document",
+          "description": "Modify the document details below.",
+          "save": "Save Changes",
+          "saving": "Saving..."
+        },
+        "deleteDialog": {
+          "trigger": "Delete",
+          "title": "Delete Document",
+          "description": "Are you sure you want to delete this document? This action cannot be undone.",
+          "confirm": "Delete Document",
+          "deleting": "Deleting...",
+          "cancel": "Cancel"
+        }
+      },
       "sidebar": {
         "dashboard": "Dashboard",
         "events": "Events",
