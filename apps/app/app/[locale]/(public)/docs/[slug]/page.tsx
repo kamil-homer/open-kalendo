@@ -1,31 +1,91 @@
 import type { Metadata } from "next";
+import { database } from "@repo/database";
+import { notFound } from "next/navigation";
+import { getDictionary } from "@repo/internationalization";
+import Link from "next/link";
+import { ChevronLeft, ExternalLink } from "lucide-react";
 
 type Props = {
-  params: Promise<{ slug: string }>;
+  params: Promise<{
+    slug: string;
+    locale: string;
+  }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
+  const doc = await database.doc.findUnique({
+    where: { slug },
+  });
+
   return {
-    title: `Docs: ${slug}`,
+    title: doc?.title ?? `Docs: ${slug}`,
   };
 }
 
 const DocsPage = async ({ params }: Props) => {
-  const { slug } = await params;
+  const { slug, locale } = await params;
+  const dict = await getDictionary(locale);
+  const doc = await database.doc.findUnique({
+    where: {
+      slug,
+      published: true,
+    },
+  });
+
+  if (!doc) {
+    notFound();
+  }
+
+  // Handle content rendering
+  const renderContent = () => {
+    if (typeof doc.content === 'string') {
+      return <p className="whitespace-pre-wrap">{doc.content}</p>;
+    }
+    
+    // Fallback for JSON content (could be enhanced if structured)
+    try {
+      return (
+        <pre className="overflow-auto rounded-lg bg-muted p-4 font-mono text-sm">
+          {JSON.stringify(doc.content, null, 2)}
+        </pre>
+      );
+    } catch (e) {
+      return <p>Error rendering content</p>;
+    }
+  };
 
   return (
-    <div className="container mx-auto p-8">
-      <h1 className="mb-4 font-bold text-3xl">Documentation: {slug}</h1>
-      <div className="prose dark:prose-invert max-w-none">
-        <p>
-          This is a placeholder for the knowledge base content related to{" "}
-          <strong>{slug}</strong>.
-        </p>
-        <p>
-          Here you can add more information about the project, guides, and other
-          useful documents.
-        </p>
+    <div className="container mx-auto px-4 py-12">
+      <div className="mx-auto max-w-3xl">
+        <Link
+          className="mb-8 inline-flex items-center text-muted-foreground transition-colors hover:text-primary"
+          href="/docs"
+        >
+          <ChevronLeft className="mr-1 h-4 w-4" />
+          {dict.app.public.docs.backToDocs}
+        </Link>
+        
+        <header className="mb-12">
+          <h1 className="mb-4 font-bold text-4xl tracking-tight">
+            {doc.title}
+          </h1>
+          {doc.link && (
+            <a
+              className="inline-flex items-center gap-2 text-primary hover:underline"
+              href={doc.link}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <ExternalLink className="h-4 w-4" />
+              {dict.app.public.docs.goToDocLink}
+            </a>
+          )}
+        </header>
+
+        <div className="prose prose-slate dark:prose-invert max-w-none">
+          {renderContent()}
+        </div>
       </div>
     </div>
   );

@@ -200,7 +200,10 @@
         "title": "Baza Wiedzy",
         "description": "Twoje główne centrum informacji o społeczności, wskazówek i zasobów.",
         "browseTitle": "Przeglądaj Bazę Wiedzy",
-        "noArticles": "Brak opublikowanych artykułów."
+        "noArticles": "Brak opublikowanych artykułów.",
+        "goToDocLink": "Idź do strony dokumentu",
+        "backToDocs": "Powrót do Bazy Wiedzy",
+        "details": "Szczegóły"
       }
     },
     "admin": {

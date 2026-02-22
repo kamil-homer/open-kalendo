@@ -7,11 +7,8 @@ import {
 } from "@repo/design-system/components/ui/card";
 import {
   BookOpen,
-  CommandIcon,
   FileText,
-  Rocket,
-  Shield,
-  Zap,
+  ExternalLink,
 } from "lucide-react";
 import Link from "next/link";
 import { getDictionary } from "@repo/internationalization";
@@ -53,19 +50,46 @@ export default async function DocsPage(props: Props) {
 
         <div className="mt-20">
           <h2 className="mb-6 font-bold text-2xl">{dict.app.public.docs.browseTitle}</h2>
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div className="flex flex-col gap-4">
             {docs.map((doc) => (
-              <Link
-                className="flex items-center gap-3 rounded-lg border bg-card p-4 transition-colors hover:bg-accent hover:text-accent-foreground"
-                href={`/docs/${doc.slug}`}
+              <div
+                className="group flex flex-col justify-between gap-4 rounded-xl border bg-card p-4 transition-all hover:border-primary/30 hover:bg-accent/5 sm:flex-row sm:items-center"
                 key={doc.id}
               >
-                <FileText className="h-5 w-5 text-muted-foreground" />
-                <span className="font-medium">{doc.title}</span>
-              </Link>
+                <div className="flex items-center gap-4">
+                  <div className="rounded-lg bg-primary/5 p-2 text-primary transition-colors group-hover:bg-primary/10">
+                    <FileText className="h-6 w-6" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-base leading-tight tracking-tight transition-colors group-hover:text-primary">
+                      {doc.title}
+                    </h3>
+                  </div>
+                </div>
+
+                <div className="flex shrink-0 items-center gap-4">
+                  {doc.link && (
+                    <a
+                      className="flex items-center gap-1 font-semibold text-muted-foreground text-xs transition-colors hover:text-primary"
+                      href={doc.link}
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      <ExternalLink className="h-3 w-3" />
+                      {dict.app.public.docs.goToDocLink}
+                    </a>
+                  )}
+                  <Link
+                    className="inline-flex h-8 items-center justify-center rounded-lg bg-secondary px-4 font-bold text-secondary-foreground text-xs transition-all hover:bg-secondary/90 focus:outline-none focus:ring-2 focus:ring-secondary/20 active:scale-95"
+                    href={`/docs/${doc.slug}`}
+                  >
+                    {dict.app.public.docs.details}
+                  </Link>
+                </div>
+              </div>
             ))}
             {docs.length === 0 && (
-              <p className="col-span-2 text-muted-foreground italic">
+              <p className="text-muted-foreground italic">
                 {dict.app.public.docs.noArticles}
               </p>
             )}

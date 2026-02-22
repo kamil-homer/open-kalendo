@@ -200,7 +200,10 @@
         "title": "Knowledge Base",
         "description": "Your central hub for community information, guidelines, and resources.",
         "browseTitle": "Browse Knowledge Base",
-        "noArticles": "No articles published yet."
+        "noArticles": "No articles published yet.",
+        "goToDocLink": "Go to external document page",
+        "backToDocs": "Back to Knowledge Base",
+        "details": "Details"
       }
     },
     "admin": {
