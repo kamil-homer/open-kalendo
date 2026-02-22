@@ -1,6 +1,6 @@
 import { database } from "@repo/database";
 import { getDictionary } from "@repo/internationalization";
-import { BookOpen, ExternalLink, FileText } from "lucide-react";
+import { ExternalLink, FileText } from "lucide-react";
 import Link from "next/link";
 
 type Props = {
@@ -22,26 +22,20 @@ export default async function DocsPage(props: Props) {
   });
 
   return (
-    <div className="container mx-auto px-4 py-12">
-      <div className="mx-auto max-w-4xl">
-        <div className="mb-8 flex items-center gap-4">
-          <div className="rounded-xl bg-primary/10 p-3">
-            <BookOpen className="h-8 w-8 text-primary" />
-          </div>
-          <div>
-            <h1 className="font-bold text-4xl tracking-tight">
-              {dict.app.public.docs.title}
-            </h1>
-            <p className="mt-2 text-muted-foreground text-xl">
-              {dict.app.public.docs.description}
-            </p>
-          </div>
-        </div>
+    <div className="container mx-auto max-w-3xl p-6">
+      <header className="mb-10">
+        <h1 className="mb-2 font-extrabold text-3xl text-primary tracking-tight">
+          {dict.app.public.docs.title}
+        </h1>
+        <p className="text-muted-foreground">
+          {dict.app.public.docs.description}
+        </p>
+      </header>
 
-        <div className="mt-20">
-          <h2 className="mb-6 font-bold text-2xl">
-            {dict.app.public.docs.browseTitle}
-          </h2>
+      <div className="space-y-10">
+        <h2 className="mb-4 border-b pb-2 font-bold text-muted-foreground/80 text-sm uppercase tracking-widest">
+          {dict.app.public.docs.browseTitle}
+        </h2>
           <div className="flex flex-col gap-4">
             {docs.map((doc) => (
               <div
@@ -87,7 +81,6 @@ export default async function DocsPage(props: Props) {
             )}
           </div>
         </div>
-      </div>
     </div>
   );
 }
