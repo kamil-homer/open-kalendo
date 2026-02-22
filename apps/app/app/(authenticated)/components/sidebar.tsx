@@ -106,21 +106,6 @@ export const GlobalSidebar = ({ children }: GlobalSidebarProperties) => {
   return (
     <>
       <Sidebar variant="inset">
-        <SidebarHeader>
-          <SidebarMenu>
-            <SidebarMenuItem>
-              <div
-                className={cn(
-                  "h-[36px] overflow-hidden transition-all [&>div]:w-full",
-                  sidebar.open ? "" : "-mx-1"
-                )}
-              >
-
-              </div>
-            </SidebarMenuItem>
-          </SidebarMenu>
-        </SidebarHeader>
-        <Search />
         <SidebarContent>
           <SidebarGroup>
 
