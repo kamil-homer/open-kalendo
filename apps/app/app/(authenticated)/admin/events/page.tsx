@@ -5,6 +5,8 @@ import { notFound } from "next/navigation";
 import { Badge } from "@repo/design-system/components/ui/badge";
 import { Header } from "../../components/header";
 import { CreateEventDialog } from "./_components/create-event-dialog";
+import { EditEventDialog } from "./_components/edit-event-dialog";
+import { DeleteEventDialog } from "./_components/delete-event-dialog";
 
 const AdminEventsPage = async () => {
   const events = await database.event.findMany({
@@ -50,7 +52,7 @@ const AdminEventsPage = async () => {
                     {event.title}
                   </td>
                   <td className="whitespace-nowrap px-6 py-4 text-sm text-muted-foreground">
-                    {format(new Date(event.date), "PPP")}
+                    {format(new Date(event.date), "PPP p")}
                   </td>
                   <td className="whitespace-nowrap px-6 py-4 text-sm text-muted-foreground">
                     {event.location || "-"}
@@ -62,16 +64,13 @@ const AdminEventsPage = async () => {
                       <Badge variant="secondary">Draft</Badge>
                     )}
                   </td>
-                  <td className="whitespace-nowrap px-6 py-4 text-right text-muted-foreground text-sm">
-                    <button className="mr-4 text-primary hover:underline">
-                      Edit
-                    </button>
-                    <button className="text-destructive hover:underline">
-                      Delete
-                    </button>
+                  <td className="whitespace-nowrap px-6 py-4 text-right text-muted-foreground text-sm flex justify-end gap-3">
+                    <EditEventDialog event={event} />
+                    <DeleteEventDialog eventId={event.id} eventTitle={event.title} />
                   </td>
                 </tr>
               ))}
+
               {events.length === 0 && (
                 <tr>
                   <td
