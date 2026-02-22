@@ -3,7 +3,7 @@
 import { database } from "@repo/database";
 import { revalidatePath } from "next/cache";
 
-export const updateArticle = async (
+export const updateDoc = async (
   id: string,
   data: {
     title?: string;
@@ -14,18 +14,18 @@ export const updateArticle = async (
   }
 ) => {
   try {
-    const article = await database.article.update({
+    const doc = await database.docs.update({
       where: { id },
       data,
     });
 
-    revalidatePath("/admin/articles");
-    revalidatePath(`/admin/articles/${article.slug}`);
+    revalidatePath("/admin/docs");
+    revalidatePath(`/admin/docs/${doc.slug}`);
     revalidatePath("/docs");
-    revalidatePath(`/docs/${article.slug}`);
+    revalidatePath(`/docs/${doc.slug}`);
 
-    return { data: article };
+    return { data: doc };
   } catch (error) {
-    return { error: "Failed to update article" };
+    return { error: `Failed to update doc, ${error}` };
   }
 };

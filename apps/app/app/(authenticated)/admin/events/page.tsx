@@ -4,12 +4,6 @@ import { notFound } from "next/navigation";
 import { Header } from "../../components/header";
 
 const AdminEventsPage = async () => {
-  const { orgId } = await auth();
-
-  if (!orgId) {
-    notFound();
-  }
-
   const events = await database.event.findMany({
     orderBy: {
       date: "desc",

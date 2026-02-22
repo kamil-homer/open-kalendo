@@ -12,7 +12,7 @@ datasource db {
 }
 
 model Event {
-  id          String   @id @default(cuid())
+  id          String   @id @default(cuid(2))
   title       String
   description String?  @db.Text
   date        DateTime
@@ -23,14 +23,26 @@ model Event {
   updatedAt   DateTime @updatedAt
 
   @@index([date])
+  @@map("event")
 }
 
-model Article { // baza wiedzy
-  id        String   @id @default(cuid())
+model Doc { // baza wiedzy
+  id        String   @id @default(cuid(2))
   title     String
   link      String?  // np. do regulaminu konkursu na stronie
   slug      String   @unique
   content   Json     // rich text z edytora
   published Boolean  @default(false)
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("doc")
+}
+
+model User {
+  id      String @id @default(cuid(2))
+  clerkId String @unique
+  email   String @unique
+
+  @@map("user")
 }

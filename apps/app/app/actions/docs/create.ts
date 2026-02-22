@@ -3,7 +3,7 @@
 import { database } from "@repo/database";
 import { revalidatePath } from "next/cache";
 
-export const createArticle = async (data: {
+export const createDoc = async (data: {
   title: string;
   slug: string;
   content: any; // Json
@@ -11,15 +11,15 @@ export const createArticle = async (data: {
   published?: boolean;
 }) => {
   try {
-    const article = await database.article.create({
+    const doc = await database.docs.create({
       data,
     });
 
-    revalidatePath("/admin/articles");
+    revalidatePath("/admin/docs");
     revalidatePath("/docs");
 
-    return { data: article };
+    return { data: doc };
   } catch (error) {
-    return { error: "Failed to create article" };
+    return { error: `Failed to create doc, ${error}` };
   }
 };

@@ -23,7 +23,7 @@ const PublicLayout = async ({ children }: PublicLayoutProps) => {
             <nav className="flex items-center space-x-6 font-medium text-sm">
               <Link
                 className="text-foreground/60 transition-colors hover:text-foreground/80"
-                href="/docs/intro"
+                href="/docs"
               >
                 Docs
               </Link>

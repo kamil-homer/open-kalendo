@@ -3,18 +3,18 @@
 import { database } from "@repo/database";
 import { revalidatePath } from "next/cache";
 
-export const deleteArticle = async (id: string) => {
+export const deleteDoc = async (id: string) => {
   try {
-    const article = await database.article.delete({
+    const article = await database.docs.delete({
       where: { id },
     });
 
-    revalidatePath("/admin/articles");
+    revalidatePath("/admin/docs");
     revalidatePath("/docs");
     revalidatePath(`/docs/${article.slug}`);
 
     return { success: true };
   } catch (error) {
-    return { error: "Failed to delete article" };
+    return { error: `Failed to delete doc, ${error}` };
   }
 };
