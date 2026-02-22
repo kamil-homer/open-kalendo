@@ -49,7 +49,7 @@ const PublicLayout = async ({ children }: PublicLayoutProps) => {
           </div>
         </div>
       </header>
-      <main className="flex-1">{children}</main>
+      <main className="flex flex-1 flex-col">{children}</main>
       <footer className="border-t py-6 md:px-8 md:py-0">
         <div className="container mx-auto flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
           <p className="text-balance text-center text-muted-foreground text-sm leading-loose md:text-left">

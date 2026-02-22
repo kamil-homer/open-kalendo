@@ -10,6 +10,10 @@ const SignIn = dynamic(() =>
 
 export const metadata: Metadata = createMetadata({ title, description });
 
-const SignInPage = () => <SignIn />;
+const SignInPage = () => (
+  <div className="flex flex-1 items-center justify-center p-4">
+    <SignIn />
+  </div>
+);
 
 export default SignInPage;

@@ -10,6 +10,10 @@ const SignUp = dynamic(() =>
 
 export const metadata: Metadata = createMetadata({ title, description });
 
-const SignUpPage = () => <SignUp />;
+const SignUpPage = () => (
+  <div className="flex flex-1 items-center justify-center p-4">
+    <SignUp />
+  </div>
+);
 
 export default SignUpPage;
