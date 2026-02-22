@@ -6,12 +6,11 @@ The "Community Hub" Starter Kit. A lightweight, self-hosted event calendar and k
 Built on top of NextForge, open-kalendo is a production-ready GitHub template designed for hobbyist groups, local clubs, non-profits, and developer circles who need a central place to share events and documentation without the bloat of enterprise tools.
 
 **✨ Features**
-- Public Event Calendar: A clean, mobile-friendly interface for everyone to see what's happening. Supports monthly views and list agendas.
-- Minimalist Knowledge Base: Share guides, rules, or resources using BaseHub - no redeploy needed. Perfect for "About Us" pages or community wikis.
-- Role-Based Access Control: Public: View events and read-only access to the knowledge base. Admin: Secure dashboard to create, edit, and delete events and notes.
-- SEO Optimized: Automatic OpenGraph images and meta-tags so your events look great when shared on Discord, X, or Facebook.
-- One-Click Deploy: Optimized for Vercel thanks to NextForge.
-- Dark Mode & Theming: Fully responsive design powered by Tailwind CSS and Shadcn/UI.
+- Public Event List: A clean, mobile-friendly interface for everyone to see what's happening. Supports monthly views and list agendas.
+- Minimalist Knowledge Base: Share guides, rules, or resources. Perfect for "About Us" pages or community wikis.
+- Role-Based Access Control: Public: View events and read-only access to the knowledge base. Admin: Secure dashboard to create, edit, and delete events and docs.
+- Deploy: Optimized for Vercel thanks to NextForge.
+- Dark Mode and fully responsive design powered by Tailwind CSS and Shadcn/UI.
 
 ## Original NextForge Documentation
 
