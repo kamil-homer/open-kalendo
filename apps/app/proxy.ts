@@ -6,7 +6,7 @@ import {
   securityMiddleware,
 } from "@repo/security/proxy";
 import { createNEMO } from "@rescale/nemo";
-import { type NextProxy, type NextRequest } from "next/server";
+import type { NextProxy, NextRequest } from "next/server";
 import { env } from "./env";
 
 const securityHeaders = env.FLAGS_SECRET

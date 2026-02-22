@@ -18,9 +18,9 @@ import { toast } from "sonner";
 import { deleteDoc } from "../../../../../actions/docs/delete";
 
 interface DeleteDocDialogProps {
+  dict: any;
   docId: string;
   docTitle: string;
-  dict: any;
 }
 
 export function DeleteDocDialog({
@@ -61,14 +61,13 @@ export function DeleteDocDialog({
           <AlertDialogTitle>{dict.title}</AlertDialogTitle>
           <AlertDialogDescription>
             {dict.description}
-            <span className="font-semibold text-foreground">
-              {" "}
-              "{docTitle}"
-            </span>
+            <span className="font-semibold text-foreground"> "{docTitle}"</span>
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel disabled={loading}>{dict.cancel}</AlertDialogCancel>
+          <AlertDialogCancel disabled={loading}>
+            {dict.cancel}
+          </AlertDialogCancel>
           <AlertDialogAction
             className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
             disabled={loading}

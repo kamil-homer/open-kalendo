@@ -119,9 +119,7 @@ export function CreateEventDialog({ dict }: { dict: any }) {
       <DialogContent className="sm:max-w-[525px]">
         <DialogHeader>
           <DialogTitle>{dict.title}</DialogTitle>
-          <DialogDescription>
-            {dict.description}
-          </DialogDescription>
+          <DialogDescription>{dict.description}</DialogDescription>
         </DialogHeader>
         <Form {...form}>
           <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>

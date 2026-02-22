@@ -1,9 +1,9 @@
-import type { Metadata } from "next";
 import { database } from "@repo/database";
-import { notFound } from "next/navigation";
 import { getDictionary } from "@repo/internationalization";
-import Link from "next/link";
 import { ChevronLeft, ExternalLink } from "lucide-react";
+import type { Metadata } from "next";
+import Link from "next/link";
+import { notFound } from "next/navigation";
 
 type Props = {
   params: Promise<{
@@ -39,10 +39,10 @@ const DocsPage = async ({ params }: Props) => {
 
   // Handle content rendering
   const renderContent = () => {
-    if (typeof doc.content === 'string') {
+    if (typeof doc.content === "string") {
       return <p className="whitespace-pre-wrap">{doc.content}</p>;
     }
-    
+
     // Fallback for JSON content (could be enhanced if structured)
     try {
       return (
@@ -65,7 +65,7 @@ const DocsPage = async ({ params }: Props) => {
           <ChevronLeft className="mr-1 h-4 w-4" />
           {dict.app.public.docs.backToDocs}
         </Link>
-        
+
         <header className="mb-12">
           <h1 className="mb-4 font-bold text-4xl tracking-tight">
             {doc.title}

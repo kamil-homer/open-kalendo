@@ -1,8 +1,8 @@
 import { database } from "@repo/database";
 import { Badge } from "@repo/design-system/components/ui/badge";
+import { getDictionary } from "@repo/internationalization";
 import { format } from "date-fns";
 import { enUS, pl } from "date-fns/locale";
-import { getDictionary } from "@repo/internationalization";
 import { Header } from "../../components/header";
 import { CreateEventDialog } from "./_components/create-event-dialog";
 import { DeleteEventDialog } from "./_components/delete-event-dialog";
@@ -26,10 +26,18 @@ const AdminEventsPage = async (props: Props) => {
 
   return (
     <>
-      <Header page={dict.app.admin.events.page.headerTitle} pages={[dict.app.admin.events.page.headerAdmin, dict.app.admin.events.page.headerEvents]} />
+      <Header
+        page={dict.app.admin.events.page.headerTitle}
+        pages={[
+          dict.app.admin.events.page.headerAdmin,
+          dict.app.admin.events.page.headerEvents,
+        ]}
+      />
       <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
         <div className="flex items-center justify-between">
-          <h1 className="font-bold text-2xl">{dict.app.admin.events.page.manageEvents}</h1>
+          <h1 className="font-bold text-2xl">
+            {dict.app.admin.events.page.manageEvents}
+          </h1>
           <CreateEventDialog dict={dict.app.admin.events.createDialog} />
         </div>
 
@@ -61,20 +69,29 @@ const AdminEventsPage = async (props: Props) => {
                     {event.title}
                   </td>
                   <td className="whitespace-nowrap px-6 py-4 text-muted-foreground text-sm">
-                    {format(new Date(event.date), "PPP p", { locale: dateLocale })}
+                    {format(new Date(event.date), "PPP p", {
+                      locale: dateLocale,
+                    })}
                   </td>
                   <td className="whitespace-nowrap px-6 py-4 text-muted-foreground text-sm">
                     {event.location || "-"}
                   </td>
                   <td className="whitespace-nowrap px-6 py-4 text-sm">
                     {event.published ? (
-                      <Badge variant="default">{dict.app.admin.events.page.table.published}</Badge>
+                      <Badge variant="default">
+                        {dict.app.admin.events.page.table.published}
+                      </Badge>
                     ) : (
-                      <Badge variant="secondary">{dict.app.admin.events.page.table.draft}</Badge>
+                      <Badge variant="secondary">
+                        {dict.app.admin.events.page.table.draft}
+                      </Badge>
                     )}
                   </td>
                   <td className="flex justify-end gap-3 whitespace-nowrap px-6 py-4 text-right text-muted-foreground text-sm">
-                    <EditEventDialog dict={dict.app.admin.events.editDialog} event={event} />
+                    <EditEventDialog
+                      dict={dict.app.admin.events.editDialog}
+                      event={event}
+                    />
                     <DeleteEventDialog
                       dict={dict.app.admin.events.deleteDialog}
                       eventId={event.id}

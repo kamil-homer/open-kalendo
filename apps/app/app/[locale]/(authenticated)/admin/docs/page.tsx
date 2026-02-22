@@ -23,13 +23,18 @@ const AdminDocsPage = async (props: Props) => {
 
   return (
     <>
-      <Header 
-        page={dict.app.admin.docs.page.headerTitle} 
-        pages={[dict.app.admin.docs.page.headerAdmin, dict.app.admin.docs.page.headerDocs]} 
+      <Header
+        page={dict.app.admin.docs.page.headerTitle}
+        pages={[
+          dict.app.admin.docs.page.headerAdmin,
+          dict.app.admin.docs.page.headerDocs,
+        ]}
       />
       <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
         <div className="flex items-center justify-between">
-          <h1 className="font-bold text-2xl">{dict.app.admin.docs.page.manageDocs}</h1>
+          <h1 className="font-bold text-2xl">
+            {dict.app.admin.docs.page.manageDocs}
+          </h1>
           <CreateDocDialog dict={dict.app.admin.docs.createDialog} />
         </div>
 
@@ -68,13 +73,20 @@ const AdminDocsPage = async (props: Props) => {
                   </td>
                   <td className="whitespace-nowrap px-6 py-4 text-sm">
                     {doc.published ? (
-                      <Badge variant="default">{dict.app.admin.docs.page.table.published}</Badge>
+                      <Badge variant="default">
+                        {dict.app.admin.docs.page.table.published}
+                      </Badge>
                     ) : (
-                      <Badge variant="secondary">{dict.app.admin.docs.page.table.draft}</Badge>
+                      <Badge variant="secondary">
+                        {dict.app.admin.docs.page.table.draft}
+                      </Badge>
                     )}
                   </td>
                   <td className="flex justify-end gap-3 whitespace-nowrap px-6 py-4 text-right text-muted-foreground text-sm">
-                    <EditDocDialog dict={dict.app.admin.docs.editDialog} doc={doc} />
+                    <EditDocDialog
+                      dict={dict.app.admin.docs.editDialog}
+                      doc={doc}
+                    />
                     <DeleteDocDialog
                       dict={dict.app.admin.docs.deleteDialog}
                       docId={doc.id}

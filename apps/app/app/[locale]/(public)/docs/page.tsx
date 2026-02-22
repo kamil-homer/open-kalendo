@@ -1,17 +1,7 @@
 import { database } from "@repo/database";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@repo/design-system/components/ui/card";
-import {
-  BookOpen,
-  FileText,
-  ExternalLink,
-} from "lucide-react";
-import Link from "next/link";
 import { getDictionary } from "@repo/internationalization";
+import { BookOpen, ExternalLink, FileText } from "lucide-react";
+import Link from "next/link";
 
 type Props = {
   params: Promise<{
@@ -49,7 +39,9 @@ export default async function DocsPage(props: Props) {
         </div>
 
         <div className="mt-20">
-          <h2 className="mb-6 font-bold text-2xl">{dict.app.public.docs.browseTitle}</h2>
+          <h2 className="mb-6 font-bold text-2xl">
+            {dict.app.public.docs.browseTitle}
+          </h2>
           <div className="flex flex-col gap-4">
             {docs.map((doc) => (
               <div

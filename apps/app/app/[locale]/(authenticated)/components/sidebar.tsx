@@ -31,12 +31,12 @@ const data = {
     name: "shadcn",
     email: "m@example.com",
     avatar: "/avatars/shadcn.jpg",
-  }
+  },
 };
 
 export const GlobalSidebar = ({ children, dict }: GlobalSidebarProperties) => {
   const sidebar = useSidebar();
-  
+
   const navMain = [
     {
       title: dict.dashboard,

@@ -1,6 +1,6 @@
-import { getDictionary } from "@repo/internationalization";
 import { auth, currentUser } from "@repo/auth/server";
 import { SidebarProvider } from "@repo/design-system/components/ui/sidebar";
+import { getDictionary } from "@repo/internationalization";
 import type { ReactNode } from "react";
 import { NotificationsProvider } from "./components/notifications-provider";
 import { GlobalSidebar } from "./components/sidebar";

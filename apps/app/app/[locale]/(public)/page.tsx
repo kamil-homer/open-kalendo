@@ -1,8 +1,8 @@
 import { database } from "@repo/database";
+import { getDictionary } from "@repo/internationalization";
 import { format, startOfDay } from "date-fns";
 import { enUS, pl } from "date-fns/locale";
 import type { Metadata } from "next";
-import { getDictionary } from "@repo/internationalization";
 
 import Link from "next/link";
 
@@ -65,7 +65,9 @@ const App = async (props: Props) => {
         <h1 className="mb-2 font-extrabold text-3xl text-primary tracking-tight">
           {dict.app.public.page.title}
         </h1>
-        <p className="text-muted-foreground">{dict.app.public.page.description}</p>
+        <p className="text-muted-foreground">
+          {dict.app.public.page.description}
+        </p>
       </header>
 
       {events.length > 0 ? (
@@ -102,7 +104,9 @@ const App = async (props: Props) => {
                             <div className="flex flex-wrap items-center gap-3 font-medium text-muted-foreground text-xs">
                               <span className="flex items-center gap-1">
                                 <span className="text-foreground/50">⏰</span>
-                                {format(event.date, "HH:mm", { locale: dateLocale })}
+                                {format(event.date, "HH:mm", {
+                                  locale: dateLocale,
+                                })}
                               </span>
                               {event.location && (
                                 <span className="flex items-center gap-1">

@@ -60,6 +60,7 @@ const formSchema = z.object({
 });
 
 interface EditEventDialogProps {
+  dict: any;
   event: {
     id: string;
     title: string;
@@ -69,7 +70,6 @@ interface EditEventDialogProps {
     link: string | null;
     published: boolean;
   };
-  dict: any;
 }
 
 export function EditEventDialog({ event, dict }: EditEventDialogProps) {
@@ -132,9 +132,7 @@ export function EditEventDialog({ event, dict }: EditEventDialogProps) {
       <DialogContent className="sm:max-w-[525px]">
         <DialogHeader>
           <DialogTitle>{dict.title}</DialogTitle>
-          <DialogDescription>
-            {dict.description}
-          </DialogDescription>
+          <DialogDescription>{dict.description}</DialogDescription>
         </DialogHeader>
         <Form {...form}>
           <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>

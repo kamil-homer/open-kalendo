@@ -50,6 +50,7 @@ const formSchema = z.object({
 });
 
 interface EditDocDialogProps {
+  dict: any;
   doc: {
     id: string;
     title: string;
@@ -58,7 +59,6 @@ interface EditDocDialogProps {
     link: string | null;
     published: boolean;
   };
-  dict: any;
 }
 
 export function EditDocDialog({ doc, dict }: EditDocDialogProps) {
@@ -67,9 +67,10 @@ export function EditDocDialog({ doc, dict }: EditDocDialogProps) {
   const router = useRouter();
 
   // Handle content formatting
-  const initialContent = typeof doc.content === 'string' 
-    ? doc.content 
-    : JSON.stringify(doc.content, null, 2);
+  const initialContent =
+    typeof doc.content === "string"
+      ? doc.content
+      : JSON.stringify(doc.content, null, 2);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -116,9 +117,7 @@ export function EditDocDialog({ doc, dict }: EditDocDialogProps) {
       <DialogContent className="sm:max-w-[525px]">
         <DialogHeader>
           <DialogTitle>{dict.title}</DialogTitle>
-          <DialogDescription>
-            {dict.description}
-          </DialogDescription>
+          <DialogDescription>{dict.description}</DialogDescription>
         </DialogHeader>
         <Form {...form}>
           <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>

@@ -18,22 +18,25 @@ const RootLayout = async ({ children, params }: RootLayoutProperties) => {
 
   return (
     <html className={fonts} lang={locale} suppressHydrationWarning>
-    <body>
-      <AnalyticsProvider>
-        <DesignSystemProvider
-          helpUrl={env.NEXT_PUBLIC_DOCS_URL}
-          privacyUrl={new URL(
-            "/legal/privacy",
-            env.NEXT_PUBLIC_WEB_URL
-          ).toString()}
-          termsUrl={new URL("/legal/terms", env.NEXT_PUBLIC_WEB_URL).toString()}
-        >
-          {children}
-        </DesignSystemProvider>
-      </AnalyticsProvider>
-      <Toolbar />
-    </body>
-  </html>
+      <body>
+        <AnalyticsProvider>
+          <DesignSystemProvider
+            helpUrl={env.NEXT_PUBLIC_DOCS_URL}
+            privacyUrl={new URL(
+              "/legal/privacy",
+              env.NEXT_PUBLIC_WEB_URL
+            ).toString()}
+            termsUrl={new URL(
+              "/legal/terms",
+              env.NEXT_PUBLIC_WEB_URL
+            ).toString()}
+          >
+            {children}
+          </DesignSystemProvider>
+        </AnalyticsProvider>
+        <Toolbar />
+      </body>
+    </html>
   );
 };
 

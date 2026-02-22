@@ -18,9 +18,9 @@ import { toast } from "sonner";
 import { deleteEvent } from "../../../../../actions/events/delete";
 
 interface DeleteEventDialogProps {
+  dict: any;
   eventId: string;
   eventTitle: string;
-  dict: any;
 }
 
 export function DeleteEventDialog({
@@ -68,7 +68,9 @@ export function DeleteEventDialog({
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel disabled={loading}>{dict.cancel}</AlertDialogCancel>
+          <AlertDialogCancel disabled={loading}>
+            {dict.cancel}
+          </AlertDialogCancel>
           <AlertDialogAction
             className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
             disabled={loading}
