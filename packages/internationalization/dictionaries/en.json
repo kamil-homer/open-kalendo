@@ -192,6 +192,7 @@
         "title": "Open Kalendo",
         "description": "Open-source events and docs management for communities.",
         "goToEventPage": "Go to event page",
+        "backToCalendar": "Back to calendar",
         "details": "Details",
         "noEvents": "No upcoming events",
         "checkLater": "Check back later!"
@@ -204,6 +205,18 @@
         "goToDocLink": "Go to external document page",
         "backToDocs": "Back to Knowledge Base",
         "details": "Details"
+      },
+      "layout": {
+        "header": {
+          "calendar": "Calendar",
+          "docs": "Docs",
+          "dashboard": "Dashboard",
+          "signIn": "Sign In"
+        },
+        "footer": {
+          "builtBy": "Built by Open Kalendo team. Open source on ",
+          "github": "GitHub"
+        }
       }
     },
     "admin": {

@@ -192,6 +192,7 @@
         "title": "Open Kalendo",
         "description": "Open-source'owe zarządzanie wydarzeniami i dokumentacją dla społeczności.",
         "goToEventPage": "Idź na stronę wydarzenia",
+        "backToCalendar": "Powrót do kalendarza",
         "details": "Szczegóły",
         "noEvents": "Brak nadchodzących wydarzeń",
         "checkLater": "Zajrzyj do nas później!"
@@ -204,6 +205,18 @@
         "goToDocLink": "Idź do strony dokumentu",
         "backToDocs": "Powrót do Bazy Wiedzy",
         "details": "Szczegóły"
+      },
+      "layout": {
+        "header": {
+          "calendar": "Kalendarz",
+          "docs": "Dokumentacja",
+          "dashboard": "Pulpit",
+          "signIn": "Zaloguj się"
+        },
+        "footer": {
+          "builtBy": "Stworzone przez zespół Open Kalendo. Kod źródłowy dostępny na ",
+          "github": "GitHubie"
+        }
       }
     },
     "admin": {
