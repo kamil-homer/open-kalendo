@@ -1,7 +1,10 @@
 import { auth } from "@repo/auth/server";
 import { database } from "@repo/database";
+import { format } from "date-fns";
 import { notFound } from "next/navigation";
+import { Badge } from "@repo/design-system/components/ui/badge";
 import { Header } from "../../components/header";
+import { CreateEventDialog } from "./_components/create-event-dialog";
 
 const AdminEventsPage = async () => {
   const events = await database.event.findMany({
@@ -16,9 +19,7 @@ const AdminEventsPage = async () => {
       <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
         <div className="flex items-center justify-between">
           <h1 className="font-bold text-2xl">Manage Events</h1>
-          <button className="rounded-md bg-primary px-4 py-2 text-primary-foreground">
-            Create New Event
-          </button>
+          <CreateEventDialog />
         </div>
 
         <div className="overflow-hidden rounded-md border">
@@ -26,12 +27,18 @@ const AdminEventsPage = async () => {
             <thead className="bg-muted">
               <tr>
                 <th className="px-6 py-3 text-left font-medium text-muted-foreground text-xs uppercase tracking-wider">
-                  ID
-                </th>
-                <th className="px-6 py-3 text-left font-medium text-muted-foreground text-xs uppercase tracking-wider">
                   Title
                 </th>
                 <th className="px-6 py-3 text-left font-medium text-muted-foreground text-xs uppercase tracking-wider">
+                  Date
+                </th>
+                <th className="px-6 py-3 text-left font-medium text-muted-foreground text-xs uppercase tracking-wider">
+                  Location
+                </th>
+                <th className="px-6 py-3 text-left font-medium text-muted-foreground text-xs uppercase tracking-wider">
+                  Status
+                </th>
+                <th className="px-6 py-3 text-right font-medium text-muted-foreground text-xs uppercase tracking-wider">
                   Actions
                 </th>
               </tr>
@@ -39,13 +46,23 @@ const AdminEventsPage = async () => {
             <tbody className="divide-y divide-border bg-background">
               {events.map((event) => (
                 <tr key={event.id}>
-                  <td className="whitespace-nowrap px-6 py-4 text-sm">
-                    {event.id}
-                  </td>
                   <td className="whitespace-nowrap px-6 py-4 font-medium text-sm">
                     {event.title}
                   </td>
-                  <td className="whitespace-nowrap px-6 py-4 text-muted-foreground text-sm">
+                  <td className="whitespace-nowrap px-6 py-4 text-sm text-muted-foreground">
+                    {format(new Date(event.date), "PPP")}
+                  </td>
+                  <td className="whitespace-nowrap px-6 py-4 text-sm text-muted-foreground">
+                    {event.location || "-"}
+                  </td>
+                  <td className="whitespace-nowrap px-6 py-4 text-sm">
+                    {event.published ? (
+                      <Badge variant="default">Published</Badge>
+                    ) : (
+                      <Badge variant="secondary">Draft</Badge>
+                    )}
+                  </td>
+                  <td className="whitespace-nowrap px-6 py-4 text-right text-muted-foreground text-sm">
                     <button className="mr-4 text-primary hover:underline">
                       Edit
                     </button>
@@ -59,7 +76,7 @@ const AdminEventsPage = async () => {
                 <tr>
                   <td
                     className="px-6 py-10 text-center text-muted-foreground"
-                    colSpan={3}
+                    colSpan={5}
                   >
                     No events managed yet.
                   </td>
