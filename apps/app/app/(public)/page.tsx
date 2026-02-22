@@ -6,7 +6,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 const title = "Open Kalendo";
-const description = "Open-source event management.";
+const description = "Open-source events and docs management for communities.";
 
 export const metadata: Metadata = {
   title,
