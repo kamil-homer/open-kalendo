@@ -17,7 +17,7 @@ model Event {
   description String?  @db.Text
   date        DateTime
   location    String?
-  link        String?  
+  link        String?
   published   Boolean  @default(false)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
@@ -29,9 +29,9 @@ model Event {
 model Doc {
   id        String   @id @default(cuid(2))
   title     String
-  link      String?  
+  link      String?
   slug      String   @unique
-  content   Json     
+  content   Json
   published Boolean  @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

@@ -12,6 +12,34 @@ Built on top of NextForge, open-kalendo is a production-ready GitHub template de
 - Deploy: Optimized for Vercel thanks to NextForge.
 - Dark Mode and fully responsive design powered by Tailwind CSS and Shadcn/UI.
 
+## Setup
+Detailed setup instructions can be found in the [next-forge documentation](https://www.next-forge.com/docs/setup/env). Here is a quick summary:
+
+1. Clone the repository to create your own project.
+2. Open the project in your IDE and navigate to the `apps/app` folder. Copy the `.env.example` file's content to `.env.local` and start filling in the required values:
+   1. Go to [Neon DB](https://console.neon.tech/) and create a free database. After creating the database, copy the connection string into `DATABASE_URL` in:
+      - `apps/app/.env.local`
+      - `packages/database/.env`
+   2. Once you have the database connection string, run the following command from the root folder:
+      - `pnpm migrate`
+      This will format the schema, generate the Prisma client, and push the database schema to your database. New tables should then appear in your Neon DB console.
+   3. Go to [Clerk](https://clerk.com/) and create a free account. Copy the publishable key and secret key into:
+      - `apps/app/.env.local`
+3. Install dependencies:
+   - `pnpm install`
+4. Build the app:
+   - `pnpm run build --filter app`
+   After a few build steps, you should see the log `Tasks: 3 successful, 3 total`.
+5. Run the app:
+   - `pnpm run dev --filter app`
+   You should see the log `- Local: http://localhost:3000`.
+
+## Deployment
+1. Go to [Vercel](https://vercel.com/) and create a free account.
+2. Import your GitHub project, set up the Vercel integration with GitHub, and select the `app` project when asked during setup.
+3. Copy the values from `apps/app/.env.local` to the Vercel environment variables. Skip `VERCEL_PROJECT_PRODUCTION_URL` (it's set automatically). `NEXT_PUBLIC_APP_URL` can be updated later with your production URL.
+4. After the deployment is complete, go to your dashboard and open the app URL to see it running.
+
 ## Original NextForge Documentation
 
 # ▲ / next-forge
