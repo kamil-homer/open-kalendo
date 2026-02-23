@@ -38,11 +38,3 @@ model Doc {
 
   @@map("doc")
 }
-
-model User {
-  id      String @id @default(cuid(2))
-  clerkId String @unique
-  email   String @unique
-
-  @@map("user")
-}
