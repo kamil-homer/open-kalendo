@@ -10,7 +10,7 @@
     "@ai-sdk/openai": "^2.0.92",
     "@t3-oss/env-nextjs": "^0.13.10",
     "ai": "^5.0.137",
-    "react": "19.2.1",
+    "react": "19.2.4",
     "streamdown": "^1.6.11",
     "tailwind-merge": "^3.5.0",
     "zod": "^4.3.6"
